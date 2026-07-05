@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㉞ ベントーグリッド型(バイオレットSaaS・ライト)
+使うべきタイミング: 種類の違う情報(価値提案・KPI・機能・実績)を1枚で俯瞰させたいとき。プロダクト全体像、月次まとめ、サービス紹介の総括。
+向かないケース: 1テーマを深く説明したい(→②ビジネス型)、時系列や順序がある内容(→⑥/⑧)
+-->
+<head>
+<meta charset="UTF-8">
+<title>ベントーグリッド型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #f8f7fd;
+    --surface: #ffffff;
+    --surface-2: #f1edfd;
+    --border: #e5e0f5;
+    --ink: #231a4f;
+    --text: #46406b;
+    --sub: #7d76a3;
+    --accent: #7c3aed;
+    --accent-2: #a78bfa;
+    --grad: linear-gradient(120deg, #7c3aed, #a78bfa);
+  }
+  .deco { position: absolute; border-radius: 50%; background: var(--accent); opacity: 0.05; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px 52px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 900;
+    color: var(--ink); line-height: 1.35;
+    margin-bottom: 28px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  /* ベントーグリッド: 4列×2行。左の大セルが主役、残りは1マスずつ */
+  .bento {
+    flex: 1; min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 28px;
+    box-shadow: 0 1px 3px rgba(35, 26, 79, 0.05);
+    display: flex; flex-direction: column;
+    min-height: 0;
+  }
+  .cell-hero { grid-column: span 2; grid-row: span 2; background: var(--surface-2); }
+
+  .icon-chip {
+    width: 46px; height: 46px; border-radius: 13px;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+    flex-shrink: 0;
+  }
+  .cell-hero h2 { font-size: 25px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 12px; }
+  .cell-hero p { font-size: 15px; color: var(--text); line-height: 1.8; }
+  .hero-tags { margin-top: auto; display: flex; gap: 10px; }
+  .pill {
+    display: inline-flex; align-items: center;
+    font-size: 13px; font-weight: 600;
+    color: var(--accent);
+    background: rgba(124, 58, 237, 0.09);
+    padding: 6px 14px; border-radius: 999px;
+  }
+
+  .cell-label { font-size: 13.5px; font-weight: 500; color: var(--sub); margin-bottom: 10px; }
+  .cell-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 42px; font-weight: 800; line-height: 1;
+    color: var(--ink); letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .cell-value span { font-size: 19px; font-weight: 600; color: var(--sub); margin-left: 4px; }
+  .cell-note { font-size: 12.5px; color: var(--sub); margin-top: auto; line-height: 1.5; }
+  .up { color: #16a34a; font-size: 13px; font-weight: 700; margin-top: 8px; }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 420px; height: 420px; top: -170px; right: -130px;"></div>
+    <div class="deco" style="width: 260px; height: 260px; bottom: -110px; left: -90px;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Product Overview</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">プロダクトの今が、<em>この1枚</em>でわかる。</h1>
+
+      <div class="bento">
+        <!-- 主役セル(2×2) -->
+        <div class="cell cell-hero">
+          <div class="icon-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 24px;">
+              <path d="M13 2 L3 14 h7 l-1 8 L19 10 h-7 z"/>
+            </svg>
+          </div>
+          <h2>ワークフロー自動化基盤<br>「YOUR PRODUCT」</h2>
+          <p>散らばった業務システムをつなぎ、定型作業を自動化。現場がノーコードで自分たちの業務フローを組み立てられるプラットフォーム。</p>
+          <div class="hero-tags">
+            <span class="pill">ノーコード</span>
+            <span class="pill">API連携</span>
+            <span class="pill">監査ログ標準対応</span>
+          </div>
+        </div>
+
+        <!-- KPIセル -->
+        <div class="cell">
+          <div class="cell-label">導入企業数</div>
+          <div class="cell-value">2,400<span>社</span></div>
+          <div class="up">▲ 前年比 +48%</div>
+          <div class="cell-note">エンタープライズ比率 41%</div>
+        </div>
+
+        <!-- 連携数セル -->
+        <div class="cell">
+          <div class="cell-label">連携アプリ</div>
+          <div class="cell-value">120<span>+</span></div>
+          <div class="cell-note">主要SaaS・基幹システムに標準コネクタを提供</div>
+        </div>
+
+        <!-- ミニグラフセル: 月間自動実行数の伸び -->
+        <div class="cell">
+          <div class="cell-label">月間自動実行数(百万件)</div>
+          <!-- baseY=78, plotH=64, maxV=50 / 値: 18,27,38,48 → barH=23,35,49,61 -->
+          <svg viewBox="0 0 200 100" style="width: 100%; flex: 1; min-height: 0;">
+            <defs>
+              <linearGradient id="bento-bar" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#a78bfa"/>
+              </linearGradient>
+            </defs>
+            <line x1="10" y1="78" x2="190" y2="78" stroke="#e5e0f5" stroke-width="1.5"/>
+            <rect x="22"  y="55" width="30" height="23" rx="4" fill="#e5e0f5"/>
+            <rect x="64"  y="43" width="30" height="35" rx="4" fill="#d6ccf2"/>
+            <rect x="106" y="29" width="30" height="49" rx="4" fill="#c4b5fd"/>
+            <rect x="148" y="17" width="30" height="61" rx="4" fill="url(#bento-bar)"/>
+            <!-- ラベル: 棒中心x、y = 78+16 = 94 -->
+            <text x="37"  y="94" text-anchor="middle" font-size="11" fill="#7d76a3">Q1</text>
+            <text x="79"  y="94" text-anchor="middle" font-size="11" fill="#7d76a3">Q2</text>
+            <text x="121" y="94" text-anchor="middle" font-size="11" fill="#7d76a3">Q3</text>
+            <text x="163" y="94" text-anchor="middle" font-size="11" fill="#7d76a3">Q4</text>
+            <!-- 値ラベル: 最終棒のみ強調 x=163, y = 17-6 = 11 → 上に置けないため棒内は避け y=11は枠内 -->
+            <text x="163" y="12" text-anchor="middle" font-size="12" font-weight="700" fill="#231a4f">48</text>
+          </svg>
+        </div>
+
+        <!-- 信頼性セル -->
+        <div class="cell">
+          <div class="cell-label">セキュリティ・稼働率</div>
+          <div class="cell-value">99.9<span>%</span></div>
+          <div class="cell-note">SLA保証。SOC 2 Type II / ISO 27001 認証取得済み</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

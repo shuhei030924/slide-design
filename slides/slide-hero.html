@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㉟ 画像ヒーロー型(全面ビジュアル+オーバーレイ)
+使うべきタイミング: 写真・ビジュアルの力で世界観を伝えたいとき。表紙、ブランド訴求、採用資料の扉、イベント告知。ユーザー提供画像を全面に使う依頼。
+向かないケース: データ・手順・比較など情報量の多い説明(→②⑩など)、画像がなく雰囲気も不要な報告資料
+備考: 背景はCSSグラデーションのプレースホルダー。実画像がある場合は .bg-media 内のコメント通り <img> に差し替える。
+-->
+<head>
+<meta charset="UTF-8">
+<title>画像ヒーロー型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #1c1c1e;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: #060a14;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ===== 背景メディア層 ===== */
+  .bg-media { position: absolute; inset: 0; }
+  /*
+    ★実画像に差し替える場合は、下の .bg-placeholder を削除して次を置く:
+    <img src="../images/hero.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+  */
+  .bg-placeholder {
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(ellipse 700px 500px at 78% 30%, rgba(45, 212, 191, 0.35), transparent 65%),
+      radial-gradient(ellipse 900px 600px at 95% 85%, rgba(59, 130, 246, 0.30), transparent 60%),
+      radial-gradient(ellipse 600px 700px at 55% 100%, rgba(16, 91, 99, 0.45), transparent 70%),
+      linear-gradient(160deg, #0a1628 0%, #0c2231 55%, #071019 100%);
+  }
+  /* 薄いグリッド模様で「素材感」を出す(実画像使用時は削除してよい) */
+  .bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(75deg, transparent 30%, #000 100%);
+    -webkit-mask-image: linear-gradient(75deg, transparent 30%, #000 100%);
+  }
+
+  /* ===== オーバーレイ(文字の可読性確保。実画像でも必須) ===== */
+  .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(75deg,
+      rgba(4, 8, 16, 0.88) 0%,
+      rgba(4, 8, 16, 0.55) 50%,
+      rgba(4, 8, 16, 0.15) 100%);
+  }
+
+  /* ===== コンテンツ層 ===== */
+  .content {
+    position: relative; z-index: 1;
+    height: 100%; padding: 64px 80px 60px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: #5eead4;
+  }
+  .logo { height: 38px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: #f1f5f9; }
+
+  .hero-block { margin-top: auto; max-width: 760px; }
+  .hero-bar { width: 64px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, #2dd4bf, #3b82f6); margin-bottom: 30px; }
+  .hero-title {
+    font-size: 60px; font-weight: 900;
+    color: #f8fafc; line-height: 1.3;
+    letter-spacing: 0.01em;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+  }
+  .hero-title em { font-style: normal; color: #5eead4; }
+  .hero-sub {
+    font-size: 19px; color: rgba(226, 232, 240, 0.85);
+    line-height: 1.9; margin-bottom: 36px;
+    max-width: 640px;
+  }
+  .hero-meta { display: flex; gap: 12px; }
+  .tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
+    color: #ccfbf1;
+    border: 1px solid rgba(94, 234, 212, 0.35);
+    background: rgba(45, 212, 191, 0.08);
+    padding: 8px 18px; border-radius: 999px;
+  }
+
+  .footer {
+    margin-top: 44px;
+    font-size: 12px; color: rgba(148, 163, 184, 0.9); letter-spacing: 0.15em;
+    padding-top: 20px; border-top: 1px solid rgba(148, 163, 184, 0.2);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="bg-media">
+      <div class="bg-placeholder"></div>
+      <div class="bg-grid"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="content">
+      <div class="topbar">
+        <span class="kicker">Vision 2030</span>
+        <!-- ★会社ロゴ: ダーク背景のため白抜きロゴを使う -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="#5eead4" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="#5eead4"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <div class="hero-block">
+        <div class="hero-bar"></div>
+        <h1 class="hero-title">現場のデータが、<br><em>次の産業</em>をつくる。</h1>
+        <p class="hero-sub">製造・物流・エネルギー。日本の現場に眠る膨大なデータを、意思決定の資産に変える。私たちが目指す2030年の姿。</p>
+        <div class="hero-meta">
+          <span class="tag">INDUSTRIAL DX</span>
+          <span class="tag">DATA PLATFORM</span>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊶ OKR・目標進捗型
+使うべきタイミング: 「今期の目標と進捗」「OKRレビュー」「達成状況の報告」。目標(Objective)+進捗バー付きの成果指標(KR)を一覧する社内報告。
+向かないケース: 結果数値だけの強調(→④KPI型)、複数部門の指標一覧(→㉘ダッシュボード型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>OKR・目標進捗型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #1c1c1e;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  }
+  :root {
+    --bg: #0c1222;
+    --surface: rgba(255,255,255,0.04);
+    --surface-2: rgba(56,189,248,0.08);
+    --border: rgba(255,255,255,0.09);
+    --ink: #f1f5f9;
+    --text: #cbd5e1;
+    --sub: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #818cf8;
+    --grad: linear-gradient(120deg, #38bdf8, #818cf8);
+  }
+  .glow { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 700;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 32px;
+  }
+  .slide-title em {
+    font-style: normal;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* Objective カード */
+  .objective {
+    background: var(--surface-2);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 18px;
+    padding: 24px 32px;
+    display: flex; align-items: center; gap: 32px;
+    margin-bottom: 22px;
+  }
+  .obj-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.25em;
+    color: var(--accent); text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .obj-text { font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.5; flex: 1; }
+  .obj-total { text-align: right; flex-shrink: 0; }
+  .obj-total .num {
+    font-family: 'Inter', sans-serif;
+    font-size: 44px; font-weight: 800; line-height: 1;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .obj-total .cap { font-size: 12px; color: var(--sub); margin-top: 4px; }
+
+  /* KR 行(進捗バー付き) */
+  .krs { flex: 1; display: flex; flex-direction: column; gap: 16px; min-height: 0; margin-bottom: 24px; }
+  .kr {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 30px;
+    display: flex; align-items: center; gap: 28px;
+  }
+  .kr-chip {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 800; letter-spacing: 0.08em;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 7px 14px; border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .kr-main { flex: 1; min-width: 0; }
+  .kr-name { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .kr-metric { font-size: 13px; color: var(--sub); }
+  .kr-metric b { color: var(--text); font-weight: 600; }
+
+  .kr-progress { width: 330px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; }
+  .track { flex: 1; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
+  .fill { height: 100%; border-radius: 999px; background: var(--grad); }
+  .pct { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 800; color: var(--ink); width: 62px; text-align: right; }
+
+  .pill {
+    font-size: 12.5px; font-weight: 700;
+    padding: 6px 14px; border-radius: 999px;
+    flex-shrink: 0; letter-spacing: 0.05em;
+  }
+  .pill.ok { color: #34d399; background: rgba(52, 211, 153, 0.12); }
+  .pill.warn { color: #fbbf24; background: rgba(251, 191, 36, 0.12); }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="glow" style="width: 500px; height: 500px; top: -220px; left: -120px; background: rgba(56, 189, 248, 0.14);"></div>
+    <div class="glow" style="width: 500px; height: 500px; bottom: -240px; right: -140px; background: rgba(129, 140, 248, 0.13);"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">OKR — Q3 2026</span>
+        <!-- ★会社ロゴ: ダーク背景では白抜きロゴを使う -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <defs>
+              <linearGradient id="logo-g" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#818cf8"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 4 L36 32 H4 Z" stroke="url(#logo-g)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="url(#logo-g)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">OKR進捗は<em>72%</em>。残り6週はKR3に集中する。</h1>
+
+      <div class="objective">
+        <span class="obj-label">Objective</span>
+        <p class="obj-text">エンタープライズ市場で「最初に選ばれる」プロダクトになる</p>
+        <div class="obj-total">
+          <div class="num">72%</div>
+          <div class="cap">全体進捗(KR平均)</div>
+        </div>
+      </div>
+
+      <div class="krs">
+        <div class="kr">
+          <span class="kr-chip">KR1</span>
+          <div class="kr-main">
+            <div class="kr-name">エンタープライズ新規契約 30社</div>
+            <div class="kr-metric">現在 <b>26社</b> / 目標 30社 — 大型商談3件がクロージング段階</div>
+          </div>
+          <div class="kr-progress">
+            <div class="track"><div class="fill" style="width: 85%;"></div></div>
+            <span class="pct">85%</span>
+          </div>
+          <span class="pill ok">順調</span>
+        </div>
+
+        <div class="kr">
+          <span class="kr-chip">KR2</span>
+          <div class="kr-main">
+            <div class="kr-name">NPSを 40 → 60 に引き上げ</div>
+            <div class="kr-metric">現在 <b>54</b> — サポート応答時間の短縮が寄与</div>
+          </div>
+          <div class="kr-progress">
+            <div class="track"><div class="fill" style="width: 70%;"></div></div>
+            <span class="pct">70%</span>
+          </div>
+          <span class="pill ok">順調</span>
+        </div>
+
+        <div class="kr">
+          <span class="kr-chip">KR3</span>
+          <div class="kr-main">
+            <div class="kr-name">導入リードタイムを 45日 → 30日 に短縮</div>
+            <div class="kr-metric">現在 <b>36日</b> — データ移行工程がボトルネック。専任チームを増強</div>
+          </div>
+          <div class="kr-progress">
+            <div class="track"><div class="fill" style="width: 60%;"></div></div>
+            <span class="pct">60%</span>
+          </div>
+          <span class="pill warn">要注意</span>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

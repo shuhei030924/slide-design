@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊱ セクション区切り型(章扉)
+使うべきタイミング: 長い資料の章の切り替わり。「第2章」「ここからは〜の話」。特大の章番号+章タイトル+その章で扱うトピック。
+向かないケース: 資料全体の目次(→⑫アジェンダ型)、内容そのものの説明
+-->
+<head>
+<meta charset="UTF-8">
+<title>セクション区切り型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --surface-2: #eff6ff;
+    --border: #e2e8f0;
+    --ink: #0f172a;
+    --text: #334155;
+    --sub: #64748b;
+    --accent: #2563eb;
+    --accent-2: #0ea5e9;
+    --grad: linear-gradient(120deg, #2563eb, #0ea5e9);
+  }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 60px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  /* 特大アウトライン章番号(右側の主役装飾) */
+  .big-num {
+    position: absolute;
+    right: 48px; top: 50%;
+    transform: translateY(-54%);
+    font-family: 'Inter', sans-serif;
+    font-size: 380px; font-weight: 800; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px #dbe6f5;
+    letter-spacing: -0.04em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .center { flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 640px; }
+  .ch-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 0.3em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .ch-title {
+    font-size: 52px; font-weight: 900;
+    color: var(--ink); line-height: 1.35;
+    margin-bottom: 28px;
+  }
+  .ch-bar { width: 64px; height: 4px; border-radius: 2px; background: var(--grad); margin-bottom: 36px; }
+
+  .topics { list-style: none; }
+  .topics li {
+    display: flex; align-items: baseline; gap: 18px;
+    font-size: 17px; color: var(--text); line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .topics .no {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 600; color: var(--sub);
+    letter-spacing: 0.08em;
+  }
+
+  /* 章プログレス(現在地を示すドット) */
+  .progress { display: flex; gap: 28px; margin-bottom: 28px; }
+  .step { display: flex; align-items: center; gap: 8px; }
+  .step .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+  .step .name { font-size: 12px; color: var(--sub); letter-spacing: 0.05em; }
+  .step.done .dot { background: #b6cdf3; }
+  .step.now .dot { background: var(--accent); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15); }
+  .step.now .name { color: var(--accent); font-weight: 700; }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 20px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="big-num">02</div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Project Proposal</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <div class="center">
+        <div class="ch-label">Chapter 02</div>
+        <h1 class="ch-title">導入効果と、<br>その先の実績。</h1>
+        <div class="ch-bar"></div>
+        <ul class="topics">
+          <li><span class="no">01</span>導入企業3社の定量的な効果測定</li>
+          <li><span class="no">02</span>業務時間・コストの変化データ</li>
+          <li><span class="no">03</span>現場担当者のリアルな声</li>
+        </ul>
+      </div>
+
+      <!-- 章プログレス: 現在の章に .now、終わった章に .done -->
+      <div class="progress">
+        <div class="step done"><span class="dot"></span><span class="name">01 課題</span></div>
+        <div class="step now"><span class="dot"></span><span class="name">02 導入効果</span></div>
+        <div class="step"><span class="dot"></span><span class="name">03 プラン</span></div>
+        <div class="step"><span class="dot"></span><span class="name">04 スケジュール</span></div>
+        <div class="step"><span class="dot"></span><span class="name">05 次のステップ</span></div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

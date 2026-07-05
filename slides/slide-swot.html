@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊷ SWOT分析型
+使うべきタイミング: 「SWOT」「強み・弱み・機会・脅威」「自社の現状分析」。事業計画・戦略検討の定番フレームワーク。
+向かないケース: 優先順位付けの2軸整理(→⑪マトリクス型)、2者の比較(→⑨対比型)
+備考: 診断系フレームワークのため、例外的にセマンティック4色(淡色面)を使用する(design-guide参照)。
+-->
+<head>
+<meta charset="UTF-8">
+<title>SWOT分析型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --border: #e2e8f0;
+    --ink: #0f172a;
+    --text: #334155;
+    --sub: #64748b;
+    --accent: #2563eb;
+    --grad: linear-gradient(120deg, #2563eb, #0ea5e9);
+  }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 36px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 28px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  /* SWOT 4象限(セマンティック淡色。面は淡く・文字は濃く) */
+  .swot {
+    flex: 1; min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .quad { border-radius: 16px; padding: 22px 28px; border: 1px solid; }
+  .quad.s { background: #ecfdf5; border-color: #bbe7d1; }
+  .quad.w { background: #fff1f2; border-color: #fbd5da; }
+  .quad.o { background: #eff6ff; border-color: #c9dff8; }
+  .quad.t { background: #fffbeb; border-color: #f5e5b8; }
+
+  .quad-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .quad-chip {
+    width: 40px; height: 40px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 19px; font-weight: 800; color: #ffffff;
+    flex-shrink: 0;
+  }
+  .s .quad-chip { background: #059669; }
+  .w .quad-chip { background: #e11d48; }
+  .o .quad-chip { background: #2563eb; }
+  .t .quad-chip { background: #d97706; }
+  .quad-name { font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .quad-axis { font-size: 11.5px; color: var(--sub); margin-top: 2px; letter-spacing: 0.04em; }
+
+  .quad ul { list-style: none; }
+  .quad li {
+    font-size: 14px; color: var(--text); line-height: 1.6;
+    padding-left: 18px; position: relative; margin-bottom: 7px;
+  }
+  .quad li::before {
+    content: ""; position: absolute; left: 0; top: 8px;
+    width: 7px; height: 7px; border-radius: 50%;
+  }
+  .s li::before { background: #059669; }
+  .w li::before { background: #e11d48; }
+  .o li::before { background: #2563eb; }
+  .t li::before { background: #d97706; }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">SWOT Analysis</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">打ち手は、<em>強み × 機会</em>に集中する。</h1>
+
+      <div class="swot">
+        <div class="quad s">
+          <div class="quad-head">
+            <div class="quad-chip">S</div>
+            <div>
+              <div class="quad-name">強み <span style="font-family: Inter, sans-serif; font-size: 13px; color: var(--sub); font-weight: 600;">Strengths</span></div>
+              <div class="quad-axis">内部環境 × プラス要因</div>
+            </div>
+          </div>
+          <ul>
+            <li>導入企業2,400社の運用ノウハウと顧客基盤</li>
+            <li>継続率99.2%を支えるカスタマーサクセス体制</li>
+            <li>基幹システム連携コネクタ120種の技術資産</li>
+          </ul>
+        </div>
+
+        <div class="quad w">
+          <div class="quad-head">
+            <div class="quad-chip">W</div>
+            <div>
+              <div class="quad-name">弱み <span style="font-family: Inter, sans-serif; font-size: 13px; color: var(--sub); font-weight: 600;">Weaknesses</span></div>
+              <div class="quad-axis">内部環境 × マイナス要因</div>
+            </div>
+          </div>
+          <ul>
+            <li>海外展開の実績・体制が未整備</li>
+            <li>エンタープライズ営業の人員不足</li>
+            <li>ブランド認知が中堅・中小に偏在</li>
+          </ul>
+        </div>
+
+        <div class="quad o">
+          <div class="quad-head">
+            <div class="quad-chip">O</div>
+            <div>
+              <div class="quad-name">機会 <span style="font-family: Inter, sans-serif; font-size: 13px; color: var(--sub); font-weight: 600;">Opportunities</span></div>
+              <div class="quad-axis">外部環境 × プラス要因</div>
+            </div>
+          </div>
+          <ul>
+            <li>大企業の基幹システム更改需要が2027年に集中</li>
+            <li>電子帳簿保存法対応による自動化投資の加速</li>
+            <li>労働人口減少で業務自動化が経営課題に</li>
+          </ul>
+        </div>
+
+        <div class="quad t">
+          <div class="quad-head">
+            <div class="quad-chip">T</div>
+            <div>
+              <div class="quad-name">脅威 <span style="font-family: Inter, sans-serif; font-size: 13px; color: var(--sub); font-weight: 600;">Threats</span></div>
+              <div class="quad-axis">外部環境 × マイナス要因</div>
+            </div>
+          </div>
+          <ul>
+            <li>海外大手SaaSの日本市場本格参入</li>
+            <li>生成AIによる業務ツールの垂直統合の波</li>
+            <li>IT人材の獲得競争激化による開発コスト上昇</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

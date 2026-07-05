@@ -281,13 +281,90 @@
 .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
 ```
 
+### プログレスバー(進捗・達成率)
+
+```css
+.track { flex: 1; height: 10px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.fill  { height: 100%; border-radius: 999px; background: var(--grad); }
+/* ダークテーマのトラックは background: rgba(255,255,255,0.08) にする */
+```
+```html
+<div class="track"><div class="fill" style="width: 72%;"></div></div>
+```
+- 横棒グラフ(アンケート結果など)も同じ構造で height を 26〜30px にすれば作れる(SVG不要)
+
+### 構成比バンド(内訳・シェアの積み上げ横帯)
+
+円グラフより崩れにくく読みやすい。**内訳を見せるときの第一選択。**
+
+```html
+<div style="display: flex; height: 80px; border-radius: 16px; overflow: hidden;">
+  <div style="width: 62%; background: var(--accent);"><!-- %とラベルを中に --></div>
+  <div style="width: 22%; background: var(--accent-2);"></div>
+  <div style="width: 11%; background: var(--border);"></div>
+  <div style="width: 5%;  background: var(--surface-2);"></div>
+</div>
+```
+- width の合計を必ず100%にする。ラベルが入らない細いセグメントは凡例のみで示す
+- 色はアクセント2色+ニュートラル2段階まで。3色以上のアクセントを使わない
+
+### 特大アウトライン数字(章番号・ランキングの装飾)
+
+```css
+.big-num {
+  position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 380px; font-weight: 800; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--border);  /* 線だけの数字 */
+  letter-spacing: -0.04em; pointer-events: none;
+}
+```
+- 本文と重ならない位置に置く(本文側は max-width で制限)。ライトテーマでは線色を --border 程度の薄さに
+
+### 縦タイムライン(時刻付きプログラム・手順)
+
+```html
+<div class="tl-row">
+  <span class="tl-time">13:00</span>          <!-- 時刻チップ -->
+  <div class="tl-node"><span class="dot"></span><span class="line"></span></div>
+  <div class="tl-body">タイトルと説明</div>
+</div>
+```
+```css
+.tl-time { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent);
+           background: var(--surface-2); padding: 6px 12px; border-radius: 9px; width: 74px; text-align: center; }
+.tl-node { width: 14px; position: relative; align-self: stretch; }
+.tl-node .dot  { position: absolute; top: 10px; width: 12px; height: 12px; border-radius: 50%; background: var(--grad); }
+.tl-node .line { position: absolute; top: 28px; bottom: -12px; left: 5px; width: 2px; background: var(--border); }
+/* 最終行の .line は消す: .tl-row:last-child .tl-node .line { display: none; } */
+```
+
+### 評価記号(比較・意思決定スライド)
+
+- `◎ ○ △` の3段階を使う(`×`は否定が強すぎるため課題列挙以外では避ける)
+- 色: ◎ = var(--accent)、○ = var(--sub)、△ = #d97706(アンバー)。記号+短い言葉(「◎ 低い」)を併記する
+
+### セマンティック4色の例外(SWOT・リスク評価など診断系のみ)
+
+通常は「アクセント2色まで」だが、**意味が色に固定されている診断系フレームワークだけ**は4色を許可する:
+
+| 意味 | 面(淡色) | 枠 | チップ/文字 |
+|---|---|---|---|
+| ポジティブ(強み) | #ecfdf5 | #bbe7d1 | #059669 |
+| ネガティブ(弱み) | #fff1f2 | #fbd5da | #e11d48 |
+| 中立・機会 | #eff6ff | #c9dff8 | #2563eb |
+| 注意・脅威 | #fffbeb | #f5e5b8 | #d97706 |
+
+**面は必ず淡色、本文文字は --ink / --text のまま。** 濃色の面に白文字を並べない(チップのみ濃色可)。
+
 ## やってはいけない集(頻出の失敗と修正)
 
 | NG | なぜダメか | 修正 |
 |---|---|---|
 | タイトルが「〜について」「〜の概要」 | 結論がなく素人資料に見える | 結論を言い切るメッセージ文にする |
 | 原色(#ff0000, #00ff00, #ffff00)の使用 | 安っぽい | テーマの --accent を使う |
-| 3色以上のアクセント | 散漫 | --accent + --accent-2 の2色まで |
+| 3色以上のアクセント | 散漫 | --accent + --accent-2 の2色まで(SWOT等の診断系のみ上記の例外) |
 | 真っ黒 #000 の文字 | コントラストが強すぎて硬い | --ink(濃紺・濃茶系)を使う |
 | 濃い影 `box-shadow: 0 10px 30px rgba(0,0,0,0.5)` | 2010年代のデザイン | 影なし or 上記カードレシピの薄い影 |
 | 日本語本文への letter-spacing | 読みにくい | 英語キッカーのみに付ける |

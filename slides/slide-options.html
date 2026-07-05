@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊲ 意思決定・オプション比較型
+使うべきタイミング: 「A案/B案/C案」「選択肢の比較」「どれにすべきか」。複数案を評価軸で比べ、推奨案を明示する稟議・提案の締め。
+向かないケース: 他社製品との比較(→㉒競合比較表型)、価格プランの提示(→⑯料金プラン型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>意思決定・オプション比較型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --surface-2: #eff6ff;
+    --border: #e2e8f0;
+    --ink: #0f172a;
+    --text: #334155;
+    --sub: #64748b;
+    --accent: #2563eb;
+    --accent-2: #0ea5e9;
+    --grad: linear-gradient(120deg, #2563eb, #0ea5e9);
+  }
+  .deco { position: absolute; border-radius: 50%; background: var(--accent); opacity: 0.05; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 900;
+    color: var(--ink); line-height: 1.35;
+    margin-bottom: 36px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .options { flex: 1; display: flex; gap: 28px; align-items: stretch; min-height: 0; margin-bottom: 28px; }
+  .opt {
+    flex: 1; position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px 30px 26px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+    display: flex; flex-direction: column;
+  }
+  .opt.reco {
+    background: var(--surface-2);
+    border: 2px solid var(--accent);
+  }
+  .badge {
+    position: absolute; top: -14px; left: 26px;
+    font-size: 13px; font-weight: 700; color: #ffffff;
+    background: var(--grad);
+    padding: 5px 16px; border-radius: 999px;
+    letter-spacing: 0.1em;
+  }
+  .opt-chip {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.12em;
+    color: var(--sub); margin-bottom: 8px;
+  }
+  .opt.reco .opt-chip { color: var(--accent); }
+  .opt-name { font-size: 21px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+  .opt-desc { font-size: 13.5px; color: var(--text); line-height: 1.7; margin-bottom: 20px; }
+
+  .evals { border-top: 1px solid var(--border); margin-top: auto; }
+  .opt.reco .evals { border-top-color: rgba(37, 99, 235, 0.2); }
+  .eval-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px; color: var(--text);
+  }
+  .opt.reco .eval-row { border-bottom-color: rgba(37, 99, 235, 0.2); }
+  .eval-row:last-child { border-bottom: none; }
+  .mark { font-size: 17px; font-weight: 700; }
+  .mark.best { color: var(--accent); }
+  .mark.ok { color: var(--sub); }
+  .mark.warn { color: #d97706; }
+
+  .verdict {
+    font-size: 14.5px; color: var(--text); line-height: 1.7;
+    background: var(--surface);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 20px;
+    margin-bottom: 26px;
+  }
+  .verdict strong { color: var(--ink); }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 420px; height: 420px; top: -170px; right: -130px;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Decision</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">3案を比較し、<em>B案(段階移行)</em>を推奨する。</h1>
+
+      <div class="options">
+        <div class="opt">
+          <div class="opt-chip">OPTION A</div>
+          <div class="opt-name">現状維持+部分改修</div>
+          <p class="opt-desc">既存システムを残し、障害の多いモジュールのみ改修する。</p>
+          <div class="evals">
+            <div class="eval-row"><span>初期コスト</span><span class="mark best">◎ 低い</span></div>
+            <div class="eval-row"><span>移行リスク</span><span class="mark ok">○ 小さい</span></div>
+            <div class="eval-row"><span>3年後の効果</span><span class="mark warn">△ 限定的</span></div>
+          </div>
+        </div>
+
+        <div class="opt reco">
+          <div class="badge">推奨</div>
+          <div class="opt-chip">OPTION B</div>
+          <div class="opt-name">段階移行(2フェーズ)</div>
+          <p class="opt-desc">会計領域から新基盤へ移行し、効果を検証しながら全社展開する。</p>
+          <div class="evals">
+            <div class="eval-row"><span>初期コスト</span><span class="mark ok">○ 中程度</span></div>
+            <div class="eval-row"><span>移行リスク</span><span class="mark best">◎ 制御可能</span></div>
+            <div class="eval-row"><span>3年後の効果</span><span class="mark best">◎ 大きい</span></div>
+          </div>
+        </div>
+
+        <div class="opt">
+          <div class="opt-chip">OPTION C</div>
+          <div class="opt-name">全面刷新(一括移行)</div>
+          <p class="opt-desc">全業務システムを1年で新基盤へ一括移行する。</p>
+          <div class="evals">
+            <div class="eval-row"><span>初期コスト</span><span class="mark warn">△ 高い</span></div>
+            <div class="eval-row"><span>移行リスク</span><span class="mark warn">△ 大きい</span></div>
+            <div class="eval-row"><span>3年後の効果</span><span class="mark best">◎ 大きい</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="verdict"><strong>推奨理由:</strong> B案は効果とリスクのバランスが最良。フェーズ1(会計領域)の成果を経営会議で確認してから全社展開を判断できる。</p>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

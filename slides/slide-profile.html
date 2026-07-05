@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊼ プロフィール型(1人紹介)
+使うべきタイミング: 「自己紹介」「登壇者紹介」「講師プロフィール」。1人を写真+経歴タイムライン+得意領域で深く紹介する。
+向かないケース: 複数メンバーの紹介(→⑰チーム紹介型)、組織の階層(→⑭組織図型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>プロフィール型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #1c1c1e;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  }
+  :root {
+    --bg: #0c1222;
+    --surface: rgba(255,255,255,0.04);
+    --surface-2: rgba(56,189,248,0.08);
+    --border: rgba(255,255,255,0.09);
+    --ink: #f1f5f9;
+    --text: #cbd5e1;
+    --sub: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #818cf8;
+    --grad: linear-gradient(120deg, #38bdf8, #818cf8);
+  }
+  .glow { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 36px; font-weight: 700;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 34px;
+  }
+  .slide-title em {
+    font-style: normal;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .body { flex: 1; display: flex; gap: 44px; min-height: 0; margin-bottom: 26px; }
+
+  /* 写真ブロック */
+  .photo {
+    width: 270px; flex-shrink: 0;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px;
+  }
+  /*
+    ★実際の写真に差し替える場合は .photo の中身を削除して:
+    <img src="../images/profile.jpg" alt="プロフィール写真"
+         style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+  */
+  .photo svg { width: 110px; opacity: 0.5; }
+  .photo .ph-text { font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 0.3em; color: var(--sub); }
+
+  .detail { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .name-row { display: flex; align-items: baseline; gap: 16px; margin-bottom: 6px; }
+  .name { font-size: 30px; font-weight: 700; color: var(--ink); }
+  .name-en { font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: 0.15em; color: var(--sub); text-transform: uppercase; }
+  .role { font-size: 14.5px; color: var(--accent); font-weight: 500; margin-bottom: 20px; }
+
+  .sec-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px; font-weight: 600; letter-spacing: 0.25em;
+    color: var(--sub); text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* 経歴タイムライン */
+  .career { margin-bottom: 22px; }
+  .c-row { display: flex; align-items: baseline; gap: 16px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+  .c-row:last-child { border-bottom: none; }
+  .c-year {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 800; color: var(--accent);
+    width: 52px; flex-shrink: 0;
+  }
+  .c-text { font-size: 14.5px; color: var(--text); }
+  .c-text b { color: var(--ink); font-weight: 700; }
+
+  /* 得意領域タグ+実績 */
+  .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+  .tag {
+    font-size: 13px; font-weight: 600;
+    color: var(--accent);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    background: rgba(56, 189, 248, 0.08);
+    padding: 6px 16px; border-radius: 999px;
+  }
+  .stats { display: flex; gap: 40px; margin-top: auto; }
+  .st .v {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px; font-weight: 800; color: var(--ink);
+    white-space: nowrap;
+  }
+  .st .v span { font-size: 14px; font-weight: 600; color: var(--sub); margin-left: 3px; }
+  .st .k { font-size: 12px; color: var(--sub); margin-top: 2px; }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="glow" style="width: 500px; height: 500px; top: -220px; left: -120px; background: rgba(56, 189, 248, 0.14);"></div>
+    <div class="glow" style="width: 500px; height: 500px; bottom: -240px; right: -140px; background: rgba(129, 140, 248, 0.13);"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Speaker</span>
+        <!-- ★会社ロゴ: ダーク背景では白抜きロゴを使う -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <defs>
+              <linearGradient id="logo-g" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#818cf8"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 4 L36 32 H4 Z" stroke="url(#logo-g)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="url(#logo-g)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">現場300社を見てきた、<em>業務自動化の実践者</em>。</h1>
+
+      <div class="body">
+        <div class="photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/><path d="M4 21 v-1 a6 5 0 0 1 16 0 v1"/>
+          </svg>
+          <span class="ph-text">Photo</span>
+        </div>
+
+        <div class="detail">
+          <div class="name-row">
+            <span class="name">山田 太郎</span>
+            <span class="name-en">Taro Yamada</span>
+          </div>
+          <div class="role">執行役員 カスタマーサクセス本部長</div>
+
+          <div class="career">
+            <div class="sec-label">Career</div>
+            <div class="c-row"><span class="c-year">2012</span><span class="c-text">大手SIerに入社。製造業の基幹システム開発に従事</span></div>
+            <div class="c-row"><span class="c-year">2017</span><span class="c-text">事業会社へ転じ、<b>DX推進部門を立ち上げ</b>。全社の業務自動化を主導</span></div>
+            <div class="c-row"><span class="c-year">2021</span><span class="c-text">当社入社。導入コンサルティングチームを統括</span></div>
+            <div class="c-row"><span class="c-year">2024</span><span class="c-text">執行役員に就任。<b>CS本部長</b>として顧客の定着・活用を統括</span></div>
+          </div>
+
+          <div class="sec-label">Expertise</div>
+          <div class="tags">
+            <span class="tag">基幹システム連携</span>
+            <span class="tag">業務ヒアリング</span>
+            <span class="tag">現場への定着支援</span>
+          </div>
+
+          <div class="stats">
+            <div class="st"><div class="v">300<span>社+</span></div><div class="k">導入支援の実績</div></div>
+            <div class="st"><div class="v">40<span>回</span></div><div class="k">セミナー登壇</div></div>
+            <div class="st"><div class="v">2<span>冊</span></div><div class="k">業務改善の著書</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

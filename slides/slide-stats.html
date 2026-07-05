@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊻ 数字で見る型(スタッツグリッド)
+使うべきタイミング: 「数字で見る会社」「データで紹介」。採用資料・会社紹介で、組織や文化を6個前後の数字で楽しく一覧するとき。
+向かないケース: 2〜3個の重要数値を大きく訴求(→④KPI型)、業績指標の報告(→㉘ダッシュボード型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>数字で見る型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #fffaf3;
+    --surface: #ffffff;
+    --surface-2: #ffedd5;
+    --border: #f3e3cf;
+    --ink: #431f0e;
+    --text: #6b4a35;
+    --sub: #a1836f;
+    --accent: #f97316;
+    --accent-2: #fbbf24;
+    --grad: linear-gradient(120deg, #f97316, #fbbf24);
+  }
+  .deco { position: absolute; border-radius: 50%; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 900;
+    color: var(--ink); line-height: 1.35;
+    margin-bottom: 30px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .grid {
+    flex: 1; min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 28px;
+    box-shadow: 0 1px 3px rgba(67, 31, 14, 0.05);
+    display: flex; flex-direction: column;
+  }
+  .stat-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .icon-chip {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .stat-label { font-size: 14px; font-weight: 700; color: var(--text); }
+  .stat-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 46px; font-weight: 800; line-height: 1;
+    color: var(--ink); letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .stat-value span { font-size: 20px; font-weight: 600; color: var(--sub); margin-left: 4px; }
+  .stat-note { font-size: 12.5px; color: var(--sub); margin-top: auto; line-height: 1.55; }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 380px; height: 380px; top: -160px; right: -110px; background: #fde8c8;"></div>
+    <div class="deco" style="width: 240px; height: 240px; bottom: -100px; left: -80px; background: #fdd9e3; opacity: 0.6;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Company By Numbers</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title"><em>数字</em>で見る、わたしたちの会社。</h1>
+
+      <div class="grid">
+        <div class="stat">
+          <div class="stat-head">
+            <div class="icon-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px;">
+                <circle cx="12" cy="8" r="4"/><path d="M4 21 v-1 a6 5 0 0 1 16 0 v1"/>
+              </svg>
+            </div>
+            <span class="stat-label">従業員数</span>
+          </div>
+          <div class="stat-value">850<span>名</span></div>
+          <div class="stat-note">この3年で約2倍に。中途・新卒は半々です</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-head">
+            <div class="icon-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px;">
+                <circle cx="12" cy="12" r="9"/><path d="M12 7 v5 l3 3"/>
+              </svg>
+            </div>
+            <span class="stat-label">平均年齢</span>
+          </div>
+          <div class="stat-value">32.4<span>歳</span></div>
+          <div class="stat-note">20代4割・30代4割。役員の最年少は29歳</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-head">
+            <div class="icon-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px;">
+                <path d="M20 12 a8 8 0 1 1 -8 -8"/><path d="M20 4 L12 12"/><path d="M15 4 h5 v5"/>
+              </svg>
+            </div>
+            <span class="stat-label">有休取得率</span>
+          </div>
+          <div class="stat-value">82<span>%</span></div>
+          <div class="stat-note">取得は時間単位でOK。推奨日も年6日設定</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-head">
+            <div class="icon-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px;">
+                <path d="M3 12 h4 l2 -6 4 12 2 -6 h6"/>
+              </svg>
+            </div>
+            <span class="stat-label">リモート勤務</span>
+          </div>
+          <div class="stat-value">週3<span>日まで</span></div>
+          <div class="stat-note">コアタイムは11〜15時のフレックス制</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-head">
+            <div class="icon-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px;">
+                <path d="M22 10 L12 5 2 10 l10 5 z"/><path d="M6 12 v5 c0 1.5 2.7 3 6 3 s6 -1.5 6 -3 v-5"/>
+              </svg>
+            </div>
+            <span class="stat-label">学習支援</span>
+          </div>
+          <div class="stat-value">12<span>万円/年</span></div>
+          <div class="stat-note">書籍・研修・資格・カンファレンス参加に利用可</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-head">
+            <div class="icon-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px;">
+                <path d="M12 21 C6 16 3 12.5 3 9 a5 5 0 0 1 9 -2.5 A5 5 0 0 1 21 9 c0 3.5 -3 7 -9 12 z"/>
+              </svg>
+            </div>
+            <span class="stat-label">育休復帰率</span>
+          </div>
+          <div class="stat-value">100<span>%</span></div>
+          <div class="stat-note">男性の取得率も78%(平均取得2.1ヶ月)</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC. — 2026年6月時点</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊵ アンケート結果型
+使うべきタイミング: 「満足度調査の結果」「アンケートで〜%が回答」。設問ごとの回答率を横棒で並べ、代表値をドーナツで強調。N数・実施時期を必ず添える。
+向かないケース: 業績など調査以外の数値推移(→⑩)、単一KPIの強調(→④)
+-->
+<head>
+<meta charset="UTF-8">
+<title>アンケート結果型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #f8f7fd;
+    --surface: #ffffff;
+    --surface-2: #f1edfd;
+    --border: #e5e0f5;
+    --ink: #231a4f;
+    --text: #46406b;
+    --sub: #7d76a3;
+    --accent: #7c3aed;
+    --accent-2: #a78bfa;
+    --grad: linear-gradient(120deg, #7c3aed, #a78bfa);
+  }
+  .deco { position: absolute; border-radius: 50%; background: var(--accent); opacity: 0.05; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 58px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 40px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .body { flex: 1; display: flex; gap: 56px; min-height: 0; margin-bottom: 24px; }
+
+  /* 横棒バー(CSSのみ。widthの%が回答率) */
+  .bars { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+  .bar-row { display: flex; align-items: center; gap: 18px; }
+  .bar-label { width: 195px; flex-shrink: 0; font-size: 14.5px; font-weight: 500; color: var(--text); line-height: 1.4; }
+  .bar-track { flex: 1; height: 28px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; background: var(--grad); }
+  .bar-pct {
+    width: 58px; flex-shrink: 0; text-align: right;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px; font-weight: 800; color: var(--ink);
+  }
+  .bars-note { font-size: 12px; color: var(--sub); margin-top: 2px; padding-left: 213px; }
+
+  /* 右: 代表値ドーナツ+調査概要 */
+  .aside { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; }
+  .donut-wrap { position: relative; width: 200px; }
+  .survey-meta {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 22px;
+    box-shadow: 0 1px 3px rgba(35, 26, 79, 0.05);
+  }
+  .survey-meta .row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; }
+  .survey-meta .k { color: var(--sub); }
+  .survey-meta .v { color: var(--text); font-weight: 500; }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 420px; height: 420px; top: -170px; right: -130px;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Survey Results</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">利用者の<em>91%</em>が、「業務が楽になった」と回答。</h1>
+
+      <div class="body">
+        <div class="bars">
+          <div class="bar-row">
+            <div class="bar-label">業務負荷が減った</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 91%;"></div></div>
+            <div class="bar-pct">91%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">情報共有が速くなった</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 84%;"></div></div>
+            <div class="bar-pct">84%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">ミスが減った</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 76%;"></div></div>
+            <div class="bar-pct">76%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">教育コストが下がった</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 63%;"></div></div>
+            <div class="bar-pct">63%</div>
+          </div>
+          <div class="bars-note">※「そう思う」+「ややそう思う」の合計</div>
+        </div>
+
+        <div class="aside">
+          <!-- ドーナツ: r=70 → 円周439.8。91% → 439.8×0.91 ≈ 400.2 -->
+          <div class="donut-wrap">
+            <svg viewBox="0 0 200 200" style="width: 100%;">
+              <defs>
+                <linearGradient id="donut-g" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#a78bfa"/>
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#f1edfd" stroke-width="22"/>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="url(#donut-g)" stroke-width="22"
+                      stroke-dasharray="400.2 439.8" stroke-linecap="round"
+                      transform="rotate(-90 100 100)"/>
+              <!-- 中央テキスト: y = 100 + 40*0.35 = 114 -->
+              <text x="100" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="40" font-weight="800" fill="#231a4f">91%</text>
+              <text x="100" y="138" text-anchor="middle" font-size="12" fill="#7d76a3">総合満足度</text>
+            </svg>
+          </div>
+          <div class="survey-meta">
+            <div class="row"><span class="k">調査対象</span><span class="v">導入企業の実務担当者</span></div>
+            <div class="row"><span class="k">有効回答数</span><span class="v">N = 1,240</span></div>
+            <div class="row"><span class="k">実施時期</span><span class="v">2026年6月</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

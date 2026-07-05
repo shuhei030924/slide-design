@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+ダークテーマ基本テンプレート(テックダーク)
+使い方: テック系・表紙・実績報告など「モダンで映える」トーンのときのベース。
+:root を design-guide.md のテーマC(ミッドナイトグリーン)に差し替えれば実績報告向けになる。
+構造(トップバー→タイトル→ボディ→フッター)は崩さない。
+-->
+<head>
+<meta charset="UTF-8">
+<title>スライドタイトル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  /* ===== 基本設定(変更しない) ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #1c1c1e;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden;        /* はみ出し禁止 */
+    position: relative;
+    background: var(--bg);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ===== カラートークン(design-guide.md のテーマB/Cを丸ごとコピーして差し替え可) ===== */
+  :root {
+    --bg: #0c1222;
+    --surface: rgba(255,255,255,0.04);
+    --surface-2: rgba(56,189,248,0.08);
+    --border: rgba(255,255,255,0.09);
+    --ink: #f1f5f9;
+    --text: #cbd5e1;
+    --sub: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #818cf8;
+    --grad: linear-gradient(120deg, #38bdf8, #818cf8);
+  }
+
+  /* 背景グロー(ダーク専用装飾) */
+  .glow {
+    position: absolute; border-radius: 50%;
+    filter: blur(100px); pointer-events: none;
+  }
+
+  /* ===== 共通構造: トップバー / タイトル / ボディ / フッター ===== */
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 60px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 28px;
+  }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  /* タイトルは結論を言い切るメッセージ文。強調はグラデ文字1箇所だけ */
+  .slide-title {
+    font-size: 40px; font-weight: 700;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 44px;
+  }
+  .slide-title em {
+    font-style: normal;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .slide-body {
+    flex: 1;
+    display: flex; gap: 36px; align-items: stretch;
+    min-height: 0; /* はみ出し防止 */
+  }
+
+  /* ダークのカードは薄い面+1px枠。影は付けない */
+  .card {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+  }
+  .card-label {
+    font-size: 15px; font-weight: 500; color: var(--sub);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-label::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--grad);
+  }
+  .card-text { font-size: 15px; color: var(--text); line-height: 1.8; }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 20px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <!-- 背景グロー: アクセント2色を対角に置く -->
+    <div class="glow" style="width: 500px; height: 500px; top: -220px; left: -120px; background: rgba(56, 189, 248, 0.14);"></div>
+    <div class="glow" style="width: 500px; height: 500px; bottom: -240px; right: -140px; background: rgba(129, 140, 248, 0.13);"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Section Label</span>
+        <!-- ★会社ロゴ: ダーク背景では白抜きロゴを使う -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <defs>
+              <linearGradient id="logo-g" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#818cf8"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 4 L36 32 H4 Z" stroke="url(#logo-g)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="url(#logo-g)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">結論を言い切るタイトルを、<em>ここ</em>に。</h1>
+
+      <div class="slide-body">
+        <div class="card">
+          <div class="card-label">要素 1</div>
+          <p class="card-text">カードの中身。KPI数値・図解・箇条書きなど内容に応じて差し替える。</p>
+        </div>
+        <div class="card">
+          <div class="card-label">要素 2</div>
+          <p class="card-text">カードは2〜3枚まで。詰め込まず、1カード1メッセージにする。</p>
+        </div>
+        <div class="card">
+          <div class="card-label">要素 3</div>
+          <p class="card-text">数値を見せる場合は Inter 800 の56〜72pxで大きく(design-guide参照)。</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

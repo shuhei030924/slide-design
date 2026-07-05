@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊸ イベントプログラム型(タイムテーブル)
+使うべきタイミング: 「当日の流れ」「セミナーのプログラム」「研修スケジュール」。時刻付きの1日のタイムテーブル+開催概要。
+向かないケース: 会議の議題リスト(→⑫アジェンダ型)、週・月単位の計画(→⑧ロードマップ型/㉗ガント型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>イベントプログラム型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #fffaf3;
+    --surface: #ffffff;
+    --surface-2: #ffedd5;
+    --border: #f3e3cf;
+    --ink: #431f0e;
+    --text: #6b4a35;
+    --sub: #a1836f;
+    --accent: #f97316;
+    --accent-2: #fbbf24;
+    --grad: linear-gradient(120deg, #f97316, #fbbf24);
+  }
+  .deco { position: absolute; border-radius: 50%; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 30px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .body { flex: 1; display: flex; gap: 52px; min-height: 0; margin-bottom: 22px; }
+
+  /* 縦タイムライン */
+  .timeline { flex: 1.5; position: relative; padding-left: 0; display: flex; flex-direction: column; justify-content: space-between; }
+  .tl-row { display: flex; align-items: flex-start; gap: 20px; position: relative; }
+  .tl-time {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--accent);
+    background: var(--surface-2);
+    padding: 6px 12px; border-radius: 9px;
+    width: 74px; text-align: center; flex-shrink: 0;
+  }
+  /* ドット+縦線 */
+  .tl-node { width: 14px; flex-shrink: 0; position: relative; align-self: stretch; }
+  .tl-node .dot {
+    position: absolute; top: 10px; left: 1px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--grad);
+  }
+  .tl-node .line {
+    position: absolute; top: 28px; bottom: -12px; left: 6px;
+    width: 2px; background: var(--border);
+  }
+  .tl-row:last-child .tl-node .line { display: none; }
+  .tl-body { padding-bottom: 18px; }
+  .tl-title { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .tl-title .tag {
+    font-size: 11.5px; font-weight: 700; color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px; padding: 2px 10px;
+    margin-left: 10px; vertical-align: 2px;
+  }
+  .tl-desc { font-size: 13px; color: var(--sub); line-height: 1.6; }
+
+  /* 右: 開催概要 */
+  .aside { width: 330px; flex-shrink: 0; display: flex; flex-direction: column; gap: 18px; justify-content: center; }
+  .info {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 30px;
+    box-shadow: 0 1px 3px rgba(67, 31, 14, 0.05);
+  }
+  .info h3 {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 9px;
+  }
+  .info h3::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--grad); }
+  .info .row { display: flex; padding: 8px 0; border-top: 1px solid var(--border); font-size: 14px; }
+  .info .k { width: 76px; color: var(--sub); flex-shrink: 0; }
+  .info .v { color: var(--text); font-weight: 500; }
+  .free {
+    text-align: center;
+    background: var(--grad);
+    color: #ffffff;
+    font-size: 16px; font-weight: 700; letter-spacing: 0.1em;
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 380px; height: 380px; top: -160px; right: -110px; background: #fde8c8;"></div>
+    <div class="deco" style="width: 240px; height: 240px; bottom: -100px; left: -80px; background: #fdd9e3; opacity: 0.6;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Event Program</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">半日で、学びを<em>実践</em>に変える。</h1>
+
+      <div class="body">
+        <div class="timeline">
+          <div class="tl-row">
+            <span class="tl-time">13:00</span>
+            <div class="tl-node"><span class="dot"></span><span class="line"></span></div>
+            <div class="tl-body">
+              <div class="tl-title">開場・受付</div>
+              <div class="tl-desc">名刺2枚をご用意ください。開始までデモブースをご覧いただけます。</div>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-time">13:30</span>
+            <div class="tl-node"><span class="dot"></span><span class="line"></span></div>
+            <div class="tl-body">
+              <div class="tl-title">基調講演「DXの現在地」<span class="tag">KEYNOTE</span></div>
+              <div class="tl-desc">◯◯大学 △△教授 — 国内2,000社の調査から見える成功企業の共通点。</div>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-time">14:20</span>
+            <div class="tl-node"><span class="dot"></span><span class="line"></span></div>
+            <div class="tl-body">
+              <div class="tl-title">事例セッション — 現場が語る自動化のリアル</div>
+              <div class="tl-desc">導入企業2社の実務担当者が、つまずきと乗り越え方を本音で共有。</div>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-time">15:10</span>
+            <div class="tl-node"><span class="dot"></span><span class="line"></span></div>
+            <div class="tl-body">
+              <div class="tl-title">ハンズオン — 自分の業務フローを作ってみる<span class="tag">実践</span></div>
+              <div class="tl-desc">PCをご持参ください。講師と一緒に実際の画面で自動化フローを構築。</div>
+            </div>
+          </div>
+          <div class="tl-row">
+            <span class="tl-time">16:30</span>
+            <div class="tl-node"><span class="dot"></span></div>
+            <div class="tl-body">
+              <div class="tl-title">個別相談会・ネットワーキング</div>
+              <div class="tl-desc">導入コンサルタントに個別相談いただけます(事前予約優先)。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="aside">
+          <div class="info">
+            <h3>開催概要</h3>
+            <div class="row"><span class="k">日時</span><span class="v">2026年8月28日(金) 13:00〜17:00</span></div>
+            <div class="row"><span class="k">会場</span><span class="v">◯◯カンファレンスセンター 3F</span></div>
+            <div class="row"><span class="k">定員</span><span class="v">80名(先着順)</span></div>
+            <div class="row"><span class="k">対象</span><span class="v">業務改善・情報システム部門の方</span></div>
+          </div>
+          <div class="free">参加無料・事前登録制</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

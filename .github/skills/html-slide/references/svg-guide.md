@@ -85,6 +85,26 @@ barX_i = 左余白 + i * (barW + gap)
 <circle cx="360" cy="90" r="6" fill="#2563eb"/>
 ```
 
+### 交換矢印(相関図: お金と価値の流れ)
+
+ビジネスモデル図など「AとBが何かを交換する」図の定型。**箱の間に上下2本の平行矢印**を引く。
+斜めの矢印は座標計算が難しいため、箱は必ず横一列に並べて水平矢印だけで描く(実例: slide-bizmodel)。
+
+```
+箱: y=70, h=80(上下の帯 y=95 / y=130 は箱の高さ内に収める)
+箱A: x=30..230、箱B: x=350..550 → ギャップ 230..350(中心x=290)
+上段(価値・破線グレー): B→A  (346,95)→(238,95)   ラベルは箱の上 y=60
+下段(お金・実線アクセント): A→B (234,130)→(342,130) ラベルは箱の下 y=170
+```
+```html
+<line x1="346" y1="95" x2="238" y2="95" stroke="#94a3b8" stroke-width="2"
+      stroke-dasharray="6 5" marker-end="url(#value-arrow)"/>
+<line x1="234" y1="130" x2="342" y2="130" stroke="#2563eb" stroke-width="2.5"
+      marker-end="url(#money-arrow)"/>
+```
+- 実線(アクセント色)=お金、破線(グレー)=価値・サービス、と決めて凡例を必ず添える
+- marker はお金用・価値用で色が違うため **2つ別 id** で定義する
+
 ### シンプルアイコン(線画)
 
 24×24 viewBox、`fill="none" stroke="currentColor(または色)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"` が基本形。

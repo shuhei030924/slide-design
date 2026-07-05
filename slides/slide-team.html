@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑰ チーム紹介型(ウォームグレー×ネイビー、メンバーカード4枚)
+使うべきタイミング: 経営陣・プロジェクトメンバー・登壇者の紹介。「メンバー紹介」「チーム紹介」「講師紹介」系の依頼。
+向かないケース: 組織の階層構造を示したい(→組織図型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>チーム紹介型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #faf9f7; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #1e293b; --accent: #0f766e; --text: #57534e; }
+  .slide-inner { height: 100%; padding: 54px 72px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 38px; font-weight: 900; color: var(--main); margin-bottom: 8px; }
+  .slide-lead { font-size: 15px; color: var(--text); margin-bottom: 28px; }
+  .members { flex: 1; display: flex; gap: 24px; }
+  .member {
+    flex: 1; background: #ffffff; border-radius: 18px;
+    padding: 32px 24px 26px;
+    box-shadow: 0 2px 14px rgba(30, 41, 59, 0.07);
+    text-align: center;
+    display: flex; flex-direction: column;
+  }
+  /* ★写真がある場合: .avatar 内を <img> に差し替え(object-fit: cover) */
+  .avatar {
+    width: 88px; height: 88px; border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 30px; color: #ffffff;
+    overflow: hidden;
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .m-name { font-size: 19px; font-weight: 700; color: var(--main); }
+  .m-role { font-size: 13px; font-weight: 500; color: var(--accent); margin: 4px 0 14px; }
+  .m-bio { font-size: 13px; line-height: 1.8; color: var(--text); text-align: left; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Team</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#0f766e" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#0f766e"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">プロジェクトを支えるメンバー</h1>
+      <p class="slide-lead">各分野の専門家が、貴社の成功にコミットします。</p>
+
+      <div class="members">
+        <div class="member">
+          <div class="avatar" style="background: #0f766e;">Y</div>
+          <div class="m-name">山田 太郎</div>
+          <div class="m-role">プロジェクトマネージャー</div>
+          <p class="m-bio">大手SIerで15年、100件超のプロジェクトを牽引。PMP保持。全体統括と品質管理を担当。</p>
+        </div>
+        <div class="member">
+          <div class="avatar" style="background: #b45309;">S</div>
+          <div class="m-name">佐藤 花子</div>
+          <div class="m-role">リードエンジニア</div>
+          <p class="m-bio">クラウドアーキテクチャの専門家。AWS認定12種。技術選定と設計レビューを担当。</p>
+        </div>
+        <div class="member">
+          <div class="avatar" style="background: #1d4ed8;">K</div>
+          <div class="m-name">鈴木 一郎</div>
+          <div class="m-role">UXデザイナー</div>
+          <p class="m-bio">事業会社でプロダクトデザインを10年。ユーザー調査から画面設計まで一貫して担当。</p>
+        </div>
+        <div class="member">
+          <div class="avatar" style="background: #9333ea;">T</div>
+          <div class="m-name">田中 美咲</div>
+          <div class="m-role">カスタマーサクセス</div>
+          <p class="m-bio">導入後の定着支援のプロ。オンボーディング設計と定例レビューで成果まで伴走。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

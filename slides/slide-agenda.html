@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑫ アジェンダ型(左カラーパネル+右リスト)
+使うべきタイミング: 説明会・研修・会議の冒頭で目次・議題・タイムテーブルを示したいとき。所要時間付きで進行が伝わる。
+向かないケース: 内容そのものの説明(アジェンダはあくまで入口)
+-->
+<head>
+<meta charset="UTF-8">
+<title>アジェンダ型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@200;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: #ffffff;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    display: flex;
+  }
+  :root {
+    --main: #0c4a6e;
+    --accent: #0284c7;
+    --text: #475569;
+  }
+  /* 左パネル */
+  .left {
+    flex: 0 0 420px;
+    background: linear-gradient(160deg, #0c4a6e, #075985);
+    padding: 64px 52px;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .left-deco {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    pointer-events: none;
+  }
+  .logo { height: 38px; display: flex; align-items: center; }
+  .logo img, .logo svg { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: #e0f2fe; }
+  .left-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .left-kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.4em;
+    color: #7dd3fc; text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .left-title {
+    font-size: 44px; font-weight: 900; color: #ffffff;
+    line-height: 1.4;
+  }
+  .left-date { font-size: 14px; color: #bae6fd; letter-spacing: 0.15em; }
+
+  /* 右: アジェンダリスト */
+  .right {
+    flex: 1;
+    padding: 72px 72px 72px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .agenda-item {
+    display: flex; align-items: center; gap: 26px;
+    padding: 21px 8px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .agenda-item:first-child { border-top: 1px solid #e2e8f0; }
+  .agenda-num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200; font-size: 40px;
+    color: #bae6fd;
+    width: 64px; flex-shrink: 0;
+  }
+  .agenda-body { flex: 1; }
+  .agenda-title { font-size: 21px; font-weight: 700; color: var(--main); }
+  .agenda-sub { font-size: 13.5px; color: var(--text); margin-top: 3px; }
+  .agenda-time {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; color: #94a3b8;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="left">
+      <div class="left-deco" style="width: 300px; height: 300px; bottom: -120px; left: -100px;"></div>
+      <div class="left-deco" style="width: 190px; height: 190px; bottom: -40px; left: 60px;"></div>
+      <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可(白抜きロゴ推奨) -->
+      <div class="logo">
+        <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+          <path d="M20 4 L36 32 H4 Z" stroke="#7dd3fc" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="20" cy="24" r="5" fill="#7dd3fc"/>
+        </svg>
+        <span class="logo-text">YOUR LOGO</span>
+      </div>
+      <div class="left-main">
+        <div class="left-kicker">Agenda</div>
+        <h1 class="left-title">本日の<br>ご説明内容</h1>
+      </div>
+      <div class="left-date">2026.07.05 — 事業戦略説明会</div>
+    </div>
+
+    <div class="right">
+      <div class="agenda-item">
+        <span class="agenda-num">01</span>
+        <div class="agenda-body">
+          <div class="agenda-title">市場環境と当社の現在地</div>
+          <div class="agenda-sub">業界トレンドと直近の業績ハイライト</div>
+        </div>
+        <span class="agenda-time">10 min</span>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-num">02</span>
+        <div class="agenda-body">
+          <div class="agenda-title">新中期経営計画の全体像</div>
+          <div class="agenda-sub">3カ年の目標数値と基本方針</div>
+        </div>
+        <span class="agenda-time">15 min</span>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-num">03</span>
+        <div class="agenda-body">
+          <div class="agenda-title">注力事業の成長戦略</div>
+          <div class="agenda-sub">投資領域と具体的な施策ロードマップ</div>
+        </div>
+        <span class="agenda-time">20 min</span>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-num">04</span>
+        <div class="agenda-body">
+          <div class="agenda-title">質疑応答</div>
+          <div class="agenda-sub">ご質問・ディスカッション</div>
+        </div>
+        <span class="agenda-time">15 min</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

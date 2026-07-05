@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑯ 料金プラン型(白×ブルー、3カラム価格表)
+使うべきタイミング: 料金体系・プラン比較を提示したいとき。「料金表」「プラン」「価格」系の依頼。推しプランを中央でフィーチャー。
+向かないケース: 価格のない特徴比較(→3カード型へ)、機能の有無比較(→競合比較表型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>料金プラン型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #f8fafc; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #1e3a8a; --accent: #2563eb; --text: #475569; }
+  .slide-inner { height: 100%; padding: 50px 80px 44px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 38px; font-weight: 900; color: var(--main); margin-bottom: 24px; }
+  .plans { flex: 1; display: flex; gap: 26px; align-items: stretch; }
+  .plan {
+    flex: 1; background: #ffffff; border-radius: 18px;
+    padding: 30px 30px 26px;
+    border: 1px solid #e2e8f0;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .plan.featured {
+    border: 2.5px solid var(--accent);
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.16);
+  }
+  .plan-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #ffffff;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+    padding: 5px 18px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .plan-name { font-size: 19px; font-weight: 700; color: var(--main); margin-bottom: 12px; }
+  .plan-price { font-family: 'Inter', sans-serif; font-size: 44px; font-weight: 800; color: #0f172a; white-space: nowrap; }
+  .plan-price .unit { font-size: 16px; font-weight: 600; color: #94a3b8; }
+  .plan-for { font-size: 13px; color: #94a3b8; margin: 6px 0 18px; }
+  .plan-list { list-style: none; flex: 1; }
+  .plan-list li {
+    font-size: 14px; color: var(--text); line-height: 1.5;
+    padding: 8px 0 8px 26px; position: relative;
+    border-top: 1px solid #f1f5f9;
+  }
+  .plan-list li::before {
+    content: "✓"; position: absolute; left: 2px; top: 8px;
+    color: var(--accent); font-weight: 700;
+  }
+  .plan-list li.na { color: #cbd5e1; }
+  .plan-list li.na::before { content: "—"; color: #cbd5e1; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Pricing</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#2563eb"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">シンプルな3つの料金プラン</h1>
+
+      <div class="plans">
+        <div class="plan">
+          <div class="plan-name">スターター</div>
+          <div class="plan-price">¥0<span class="unit"> /月</span></div>
+          <div class="plan-for">個人・お試し利用に</div>
+          <ul class="plan-list">
+            <li>基本機能すべて</li>
+            <li>3ユーザーまで</li>
+            <li>コミュニティサポート</li>
+            <li class="na">API連携</li>
+            <li class="na">専任サポート</li>
+          </ul>
+        </div>
+
+        <div class="plan featured">
+          <div class="plan-badge">いちばん人気</div>
+          <div class="plan-name">ビジネス</div>
+          <div class="plan-price">¥50,000<span class="unit"> /月</span></div>
+          <div class="plan-for">成長中のチームに</div>
+          <ul class="plan-list">
+            <li>基本機能すべて</li>
+            <li>50ユーザーまで</li>
+            <li>メール・チャットサポート</li>
+            <li>API連携・外部ツール接続</li>
+            <li class="na">専任サポート</li>
+          </ul>
+        </div>
+
+        <div class="plan">
+          <div class="plan-name">エンタープライズ</div>
+          <div class="plan-price">要相談</div>
+          <div class="plan-for">大規模・カスタム要件に</div>
+          <ul class="plan-list">
+            <li>基本機能すべて</li>
+            <li>ユーザー数無制限</li>
+            <li>SLA・監査ログ対応</li>
+            <li>API連携・専用環境</li>
+            <li>専任カスタマーサクセス</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

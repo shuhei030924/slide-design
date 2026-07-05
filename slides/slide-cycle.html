@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㉕ サイクル型(白×グリーン、循環図)
+使うべきタイミング: PDCA・改善サイクル・循環プロセスなど、繰り返し回る仕組みを示したいとき。「サイクル」「循環」「PDCA」系の依頼。
+向かないケース: 一方向で終わる手順(→フロー型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>サイクル型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #ffffff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #14532d; --accent: #16a34a; --text: #475569; }
+  .slide-inner { height: 100%; padding: 56px 72px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 38px; font-weight: 900; color: var(--main); margin-bottom: 6px; }
+  .body { flex: 1; display: flex; gap: 44px; align-items: center; }
+  .cycle { flex: 1.05; }
+  .details { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+  .det { display: flex; gap: 14px; align-items: flex-start; padding: 14px 18px; border-radius: 12px; background: #f0fdf4; }
+  .det-key {
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px;
+    color: #ffffff; background: var(--accent);
+    width: 34px; height: 34px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .det-title { font-size: 16px; font-weight: 700; color: var(--main); }
+  .det-desc { font-size: 13px; line-height: 1.7; color: var(--text); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Improvement Cycle</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#16a34a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#16a34a"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">成果を生み続ける改善サイクル</h1>
+
+      <div class="body">
+        <div class="cycle">
+          <!--
+            循環図 (viewBox 0 0 520 480): 中心 (260,240)
+            4ノード円 r=64: 上(260,80) 右(430,240) 下(260,400) 左(90,240)
+            矢印弧: 半径160の円周上を各ノード間で結ぶ(A rx ry 0 0 1 で時計回り)
+            弧の始点/終点はノード円の外周から少し離す
+          -->
+          <svg viewBox="0 0 520 480" style="width: 100%;">
+            <defs>
+              <marker id="cyc-ar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#86efac"/>
+              </marker>
+            </defs>
+            <!-- 弧(時計回り): 上→右 -->
+            <path d="M 335 115 A 175 175 0 0 1 400 180" fill="none" stroke="#86efac" stroke-width="4" marker-end="url(#cyc-ar)"/>
+            <!-- 右→下 -->
+            <path d="M 400 305 A 175 175 0 0 1 335 368" fill="none" stroke="#86efac" stroke-width="4" marker-end="url(#cyc-ar)"/>
+            <!-- 下→左 -->
+            <path d="M 186 368 A 175 175 0 0 1 120 305" fill="none" stroke="#86efac" stroke-width="4" marker-end="url(#cyc-ar)"/>
+            <!-- 左→上 -->
+            <path d="M 120 180 A 175 175 0 0 1 186 115" fill="none" stroke="#86efac" stroke-width="4" marker-end="url(#cyc-ar)"/>
+
+            <!-- ノード -->
+            <circle cx="260" cy="80" r="64" fill="#16a34a"/>
+            <text x="260" y="74" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">Plan</text>
+            <text x="260" y="98" text-anchor="middle" font-size="13" fill="#dcfce7">計画</text>
+
+            <circle cx="430" cy="240" r="64" fill="#22c55e"/>
+            <text x="430" y="234" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">Do</text>
+            <text x="430" y="258" text-anchor="middle" font-size="13" fill="#dcfce7">実行</text>
+
+            <circle cx="260" cy="400" r="64" fill="#22c55e"/>
+            <text x="260" y="394" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">Check</text>
+            <text x="260" y="418" text-anchor="middle" font-size="13" fill="#dcfce7">検証</text>
+
+            <circle cx="90" cy="240" r="64" fill="#22c55e"/>
+            <text x="90" y="234" text-anchor="middle" font-size="18" font-weight="800" fill="#ffffff">Action</text>
+            <text x="90" y="258" text-anchor="middle" font-size="13" fill="#dcfce7">改善</text>
+
+            <!-- 中心ラベル -->
+            <text x="260" y="234" text-anchor="middle" font-size="15" font-weight="700" fill="#14532d">週次で回す</text>
+            <text x="260" y="258" text-anchor="middle" font-size="15" font-weight="700" fill="#14532d">高速サイクル</text>
+          </svg>
+        </div>
+
+        <div class="details">
+          <div class="det"><span class="det-key">P</span><div><div class="det-title">データに基づく計画</div><div class="det-desc">前週の数値から改善仮説を立て、優先度を決定。</div></div></div>
+          <div class="det"><span class="det-key">D</span><div><div class="det-title">小さく素早く実行</div><div class="det-desc">1週間で完了する粒度に分解してリリース。</div></div></div>
+          <div class="det"><span class="det-key">C</span><div><div class="det-title">効果を定量検証</div><div class="det-desc">ダッシュボードでKPIへの影響を即日確認。</div></div></div>
+          <div class="det"><span class="det-key">A</span><div><div class="det-title">仕組みに反映</div><div class="det-desc">効果のあった施策を標準プロセスに組み込む。</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

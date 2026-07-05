@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㉑ 市場規模型(白×ブルー、TAM/SAM/SOM同心円)
+使うべきタイミング: 市場規模・事業機会の大きさを示したいとき。投資家向け資料・事業計画。「市場規模」「TAM」系の依頼。
+向かないケース: 時系列の成長(→グラフ型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>市場規模型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #ffffff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #0c4a6e; --accent: #0ea5e9; --text: #475569; }
+  .slide-inner { height: 100%; padding: 56px 72px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 38px; font-weight: 900; color: var(--main); margin-bottom: 10px; }
+  .body { flex: 1; display: flex; gap: 40px; align-items: center; }
+  .circles { flex: 1.1; }
+  .legend { flex: 1; display: flex; flex-direction: column; gap: 18px; }
+  .leg {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 18px 22px; border-radius: 14px; background: #f8fafc;
+  }
+  .leg-dot { width: 16px; height: 16px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .leg-name { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800; color: var(--main); letter-spacing: 0.06em; }
+  .leg-val { font-size: 24px; font-weight: 900; color: #0f172a; margin: 2px 0; white-space: nowrap; }
+  .leg-desc { font-size: 13px; line-height: 1.7; color: var(--text); }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Market Size</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#0ea5e9" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#0ea5e9"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">狙うのは、8,000億円の成長市場。</h1>
+
+      <div class="body">
+        <div class="circles">
+          <!--
+            同心円(下揃え): viewBox 0 0 520 470, 基準底辺 y=440
+            TAM r=210 → cy=230 / SAM r=135 → cy=305 / SOM r=65 → cy=375
+          -->
+          <svg viewBox="0 0 520 470" style="width: 100%;">
+            <circle cx="260" cy="230" r="210" fill="#e0f2fe"/>
+            <circle cx="260" cy="305" r="135" fill="#7dd3fc"/>
+            <circle cx="260" cy="375" r="65"  fill="#0284c7"/>
+            <text x="260" y="80"  text-anchor="middle" font-size="18" font-weight="800" fill="#0c4a6e">TAM 8,000億円</text>
+            <text x="260" y="228" text-anchor="middle" font-size="17" font-weight="800" fill="#0c4a6e">SAM 2,400億円</text>
+            <text x="260" y="382" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">SOM 240億円</text>
+          </svg>
+        </div>
+
+        <div class="legend">
+          <div class="leg">
+            <span class="leg-dot" style="background: #e0f2fe; border: 2px solid #bae6fd;"></span>
+            <div>
+              <div class="leg-name">TAM — 全体市場</div>
+              <div class="leg-val">8,000億円</div>
+              <div class="leg-desc">国内の業務システム市場全体。年率8%で拡大中。</div>
+            </div>
+          </div>
+          <div class="leg">
+            <span class="leg-dot" style="background: #7dd3fc;"></span>
+            <div>
+              <div class="leg-name">SAM — 獲得可能市場</div>
+              <div class="leg-val">2,400億円</div>
+              <div class="leg-desc">当社プロダクトが対象とする中堅・中小企業セグメント。</div>
+            </div>
+          </div>
+          <div class="leg">
+            <span class="leg-dot" style="background: #0284c7;"></span>
+            <div>
+              <div class="leg-name">SOM — 当面の目標市場</div>
+              <div class="leg-val">240億円</div>
+              <div class="leg-desc">3年でシェア10%の獲得を目指す現実的なターゲット。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

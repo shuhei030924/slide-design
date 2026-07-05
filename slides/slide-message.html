@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑦ 和モダン・メッセージ型(明朝×朱色)
+使うべきタイミング: 企業理念・周年記念・職人/伝統/老舗系ブランドなど、格調と情緒で短い言葉を届けたいとき。日本的な題材と相性良。
+向かないケース: データ説明・機能紹介・グローバル/テック系ブランド
+-->
+<head>
+<meta charset="UTF-8">
+<title>和モダン・メッセージ型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #d6d3cd;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: #f7f5f0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+  :root {
+    --sumi: #26231e;
+    --shu: #b93a32;   /* 朱色 */
+    --nibi: #8a857c;  /* 鈍色 */
+  }
+  /* 背景: 大きな円(日の丸モチーフ) */
+  .enso {
+    position: absolute;
+    top: 50%; right: -180px;
+    transform: translateY(-50%);
+    width: 640px; height: 640px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #efe9df, #e7dfd2);
+  }
+  .kasumi {
+    position: absolute;
+    height: 1px; background: #d9d2c5;
+  }
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 64px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; }
+  .kicker {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px; letter-spacing: 0.6em;
+    color: var(--nibi);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo img, .logo svg { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 16px; letter-spacing: 0.15em; color: var(--sumi); }
+
+  .hero {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-message {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 58px; font-weight: 700;
+    color: var(--sumi);
+    line-height: 1.7;
+    letter-spacing: 0.12em;
+  }
+  .hero-message .shu { color: var(--shu); }
+  .hero-sub {
+    font-size: 16px; font-weight: 300;
+    color: var(--nibi);
+    letter-spacing: 0.25em;
+    margin-top: 36px;
+    padding-left: 6px;
+  }
+  /* 朱色の落款風マーク */
+  .rakkan {
+    position: absolute;
+    right: 84px; bottom: 110px;
+    width: 64px; height: 64px;
+    background: var(--shu);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px; font-weight: 800; color: #f7f5f0;
+    letter-spacing: 0;
+    writing-mode: vertical-rl;
+  }
+  .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; letter-spacing: 0.3em; color: var(--nibi);
+    border-top: 1px solid #e0dacd;
+    padding-top: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="enso"></div>
+    <div class="kasumi" style="top: 200px; left: 0; width: 320px;"></div>
+    <div class="kasumi" style="top: 560px; left: 120px; width: 480px;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">企業理念</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 10px;">
+            <circle cx="20" cy="20" r="15" stroke="#26231e" stroke-width="2"/>
+            <circle cx="20" cy="20" r="6" fill="#b93a32"/>
+          </svg>
+          <span class="logo-text">貴社名</span>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1 class="hero-message">
+          手を抜かない。<br>
+          それだけを、<span class="shu">百年</span>。
+        </h1>
+        <p class="hero-sub">創業より受け継ぐ、ものづくりの心。</p>
+      </div>
+
+      <div class="rakkan">信</div>
+
+      <div class="footer">
+        <span>YOUR COMPANY</span>
+        <span>二〇二六年 七月</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

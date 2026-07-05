@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㉚ CTA・クロージング型(グラデーション×白、行動喚起)
+使うべきタイミング: 資料の締め。「お問い合わせ」「次のステップ」「まずは無料で」など、聴衆に行動を促したいとき。
+向かないケース: 情報提供が目的のスライド
+-->
+<head>
+<meta charset="UTF-8">
+<title>CTA型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #1c1c1e; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide {
+    width: 1280px; height: 720px; overflow: hidden; position: relative;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 55%, #3b82f6 100%);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+  .deco { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,0.14); pointer-events: none; }
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 64px 90px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .logo { height: 38px; display: flex; align-items: center; align-self: flex-end; }
+  .logo svg, .logo img { height: 100%; max-width: 220px; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: #ffffff; }
+  .hero { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .hero-kicker { font-size: 16px; font-weight: 500; color: #bfdbfe; letter-spacing: 0.2em; margin-bottom: 20px; }
+  .hero-title { font-size: 54px; font-weight: 900; color: #ffffff; line-height: 1.4; margin-bottom: 36px; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: #ffffff; color: #1e3a8a;
+    font-size: 21px; font-weight: 900;
+    padding: 20px 52px; border-radius: 999px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+    margin-bottom: 40px;
+  }
+  .steps { display: flex; gap: 40px; }
+  .step { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #dbeafe; }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; color: #ffffff;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .contact {
+    display: flex; gap: 44px; justify-content: center;
+    font-size: 14px; color: #bfdbfe;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    padding-top: 24px; width: 100%;
+  }
+  .contact strong { color: #ffffff; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 420px; height: 420px; top: -180px; left: -140px;"></div>
+    <div class="deco" style="width: 300px; height: 300px; bottom: -120px; right: -80px;"></div>
+    <div class="slide-inner">
+      <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可(白抜き推奨) -->
+      <div class="logo">
+        <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#ffffff"/></svg>
+        <span class="logo-text">YOUR LOGO</span>
+      </div>
+
+      <div class="hero">
+        <p class="hero-kicker">— まずは、話を聞くだけでも —</p>
+        <h1 class="hero-title">30分の無料相談で、<br>貴社の課題を整理しませんか。</h1>
+        <div class="cta-btn">
+          無料相談を予約する
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 22px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="step-num">1</span>フォームから予約</div>
+          <div class="step"><span class="step-num">2</span>オンラインでヒアリング</div>
+          <div class="step"><span class="step-num">3</span>最適プランをご提案</div>
+        </div>
+      </div>
+
+      <div class="contact">
+        <span>WEB: <strong>example.com/contact</strong></span>
+        <span>MAIL: <strong>sales@example.com</strong></span>
+        <span>TEL: <strong>03-1234-5678(平日 9:00-18:00)</strong></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

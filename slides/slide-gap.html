@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㉔ ギャップ分析型(白×オレンジ、現状→理想+施策)
+使うべきタイミング: 現状と理想(目標)のギャップを示し、埋めるための施策を提示したいとき。「現状と課題」「あるべき姿」系の依頼。
+向かないケース: 導入前後の結果比較(→対比型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>ギャップ分析型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #ffffff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #431407; --accent: #ea580c; --text: #57534e; }
+  .slide-inner { height: 100%; padding: 56px 76px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 38px; font-weight: 900; color: var(--main); margin-bottom: 30px; }
+
+  .gap-row { display: flex; align-items: stretch; gap: 26px; margin-bottom: 30px; }
+  .state {
+    flex: 1; border-radius: 18px; padding: 28px 32px;
+  }
+  .state-now { background: #f5f5f4; }
+  .state-goal { background: #fff7ed; border: 2px solid #fdba74; }
+  .state-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.25em; margin-bottom: 10px; }
+  .state-now .state-label { color: #a8a29e; }
+  .state-goal .state-label { color: var(--accent); }
+  .state-val { font-size: 40px; font-weight: 900; color: var(--main); white-space: nowrap; }
+  .state-val small { font-size: 17px; font-weight: 700; color: #a8a29e; }
+  .state-desc { font-size: 14px; color: var(--text); margin-top: 8px; line-height: 1.7; }
+  .gap-arrow {
+    flex: 0 0 110px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  }
+  .gap-badge {
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800;
+    color: #ffffff; background: var(--accent);
+    padding: 6px 16px; border-radius: 999px; letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .actions-label { font-size: 15px; font-weight: 700; color: var(--accent); letter-spacing: 0.2em; margin-bottom: 14px; }
+  .actions { display: flex; gap: 20px; }
+  .action {
+    flex: 1; background: #ffffff; border: 1px solid #e7e5e4;
+    border-radius: 14px; padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(67, 20, 7, 0.05);
+  }
+  .action-num { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+  .action-title { font-size: 17px; font-weight: 700; color: var(--main); margin-bottom: 5px; }
+  .action-desc { font-size: 13px; line-height: 1.7; color: var(--text); }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Gap Analysis</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#ea580c" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#ea580c"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">目標達成へのギャップと打ち手</h1>
+
+      <div class="gap-row">
+        <div class="state state-now">
+          <div class="state-label">現状 — AS IS</div>
+          <div class="state-val">月間 120<small> 件</small></div>
+          <p class="state-desc">新規リード獲得数。広告依存度が高く、獲得単価は上昇傾向。</p>
+        </div>
+        <div class="gap-arrow">
+          <svg viewBox="0 0 60 24" style="width: 60px;"><path d="M2 12 h44 M38 4 l10 8 -10 8" stroke="#ea580c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="gap-badge">GAP ×2.5</span>
+        </div>
+        <div class="state state-goal">
+          <div class="state-label">目標 — TO BE</div>
+          <div class="state-val">月間 300<small> 件</small></div>
+          <p class="state-desc">来期末までの目標。広告に頼らない獲得チャネルの確立が鍵。</p>
+        </div>
+      </div>
+
+      <div class="actions-label">ギャップを埋める3つの施策</div>
+      <div class="actions">
+        <div class="action">
+          <div class="action-num">ACTION 01</div>
+          <div class="action-title">SEOコンテンツ強化</div>
+          <p class="action-desc">月10本の記事制作でオーガニック流入を3倍に。</p>
+        </div>
+        <div class="action">
+          <div class="action-num">ACTION 02</div>
+          <div class="action-title">パートナー紹介制度</div>
+          <p class="action-desc">既存顧客・代理店経由の紹介チャネルを新設。</p>
+        </div>
+        <div class="action">
+          <div class="action-num">ACTION 03</div>
+          <div class="action-title">ウェビナー定例化</div>
+          <p class="action-desc">月2回の定期開催で見込み客との接点を拡大。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

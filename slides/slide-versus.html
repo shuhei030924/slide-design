@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑨ 対比型 Before/After(白×ローズ)
+使うべきタイミング: 導入前後・新旧比較・他社比較など、「悪い状態→良い状態」のコントラストで価値を訴求したいとき。
+向かないケース: 3者以上の比較(→3カード型へ)、2軸での整理(→マトリクス型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>対比型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: #ffffff;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  }
+  :root {
+    --main: #0f172a;
+    --accent: #e11d48;
+    --gray: #94a3b8;
+    --text: #475569;
+  }
+  .slide-inner {
+    height: 100%; padding: 56px 72px 52px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.35em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo img, .logo svg { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+
+  .slide-title { font-size: 42px; font-weight: 900; color: var(--main); margin-bottom: 34px; }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .versus { flex: 1; display: flex; align-items: stretch; gap: 0; position: relative; }
+  .panel {
+    flex: 1;
+    border-radius: 20px;
+    padding: 40px 44px;
+    display: flex; flex-direction: column;
+  }
+  .panel-before {
+    background: #f1f5f9;
+    margin-right: 44px;
+  }
+  .panel-after {
+    background: linear-gradient(150deg, #fff1f2, #ffe4e6);
+    border: 2px solid #fecdd3;
+    margin-left: 44px;
+  }
+  .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 800; letter-spacing: 0.25em;
+    margin-bottom: 22px;
+  }
+  .panel-before .panel-label { color: var(--gray); }
+  .panel-after .panel-label { color: var(--accent); }
+  .panel-list { list-style: none; }
+  .panel-list li {
+    font-size: 17px; line-height: 1.6;
+    padding: 13px 0 13px 34px;
+    position: relative;
+    color: var(--text);
+  }
+  .panel-before .panel-list li::before {
+    content: "✕";
+    position: absolute; left: 0; top: 13px;
+    color: var(--gray); font-weight: 700;
+  }
+  .panel-after .panel-list li { color: var(--main); font-weight: 500; }
+  .panel-after .panel-list li::before {
+    content: "◎";
+    position: absolute; left: 0; top: 13px;
+    color: var(--accent); font-weight: 700;
+  }
+  /* 中央のVSバッジ */
+  .vs-badge {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 74px; height: 74px;
+    border-radius: 50%;
+    background: var(--main);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px; font-weight: 800; letter-spacing: 0.05em;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25);
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Comparison</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="#e11d48" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="#e11d48"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">従来のやり方は、もう<em>卒業</em>。</h1>
+
+      <div class="versus">
+        <div class="panel panel-before">
+          <div class="panel-label">BEFORE — 従来の方法</div>
+          <ul class="panel-list">
+            <li>Excelでの手作業集計に毎月20時間</li>
+            <li>データが部署ごとに分散し、二重管理が発生</li>
+            <li>ミスの発見が月末まで遅れ、手戻りが常態化</li>
+            <li>ノウハウが担当者に依存し、引き継ぎ困難</li>
+          </ul>
+        </div>
+
+        <div class="vs-badge">VS</div>
+
+        <div class="panel panel-after">
+          <div class="panel-label">AFTER — 導入後</div>
+          <ul class="panel-list">
+            <li>集計は完全自動化、作業時間ゼロに</li>
+            <li>全データを一元管理、常に最新を共有</li>
+            <li>異常はリアルタイム検知、即座に修正</li>
+            <li>手順を標準化、誰でも同品質で運用可能</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

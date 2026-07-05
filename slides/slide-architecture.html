@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑮ システム構成図型(ダーク×シアン)
+使うべきタイミング: システム構成・技術スタック・データの流れなど、技術アーキテクチャを説明したいとき。エンジニア/IT部門向け資料。
+向かないケース: 非技術者向けの概念説明(→ソリューション全体像型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>システム構成図型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #1c1c1e; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #0f172a; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+  .slide-inner { height: 100%; padding: 56px 72px; display: flex; flex-direction: column; position: relative; z-index: 1; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: #22d3ee; text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: #e2e8f0; }
+  .slide-title { font-size: 38px; font-weight: 900; color: #f1f5f9; margin-bottom: 24px; }
+  .arch { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0; }
+  .tier { display: flex; align-items: center; gap: 20px; }
+  .tier-label {
+    flex: 0 0 150px; text-align: right;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.2em; color: #475569; text-transform: uppercase;
+  }
+  .boxes { flex: 1; display: flex; gap: 18px; }
+  .box {
+    flex: 1; border-radius: 14px; padding: 20px 22px;
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(34, 211, 238, 0.25);
+  }
+  .box.em { border-color: #22d3ee; background: rgba(34, 211, 238, 0.09); }
+  .box-name { font-size: 17px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
+  .box-desc { font-size: 12.5px; color: #64748b; }
+  .arrow-row { display: flex; align-items: center; gap: 20px; height: 44px; }
+  .arrow-space { flex: 0 0 150px; }
+  .arrows { flex: 1; display: flex; justify-content: center; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="glow" style="width: 480px; height: 480px; top: -220px; right: -140px; background: rgba(34, 211, 238, 0.12);"></div>
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Architecture</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可(白抜き推奨) -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#22d3ee" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#22d3ee"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">システム全体構成</h1>
+
+      <div class="arch">
+        <div class="tier">
+          <div class="tier-label">Client</div>
+          <div class="boxes">
+            <div class="box"><div class="box-name">Webアプリ</div><div class="box-desc">React / TypeScript</div></div>
+            <div class="box"><div class="box-name">モバイルアプリ</div><div class="box-desc">iOS / Android</div></div>
+            <div class="box"><div class="box-name">外部システム</div><div class="box-desc">パートナー連携</div></div>
+          </div>
+        </div>
+
+        <div class="arrow-row">
+          <div class="arrow-space"></div>
+          <div class="arrows">
+            <svg viewBox="0 0 24 32" style="height: 32px;"><path d="M12 2 v22 M6 18 l6 7 6 -7" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="tier-label">API Layer</div>
+          <div class="boxes">
+            <div class="box em"><div class="box-name">API Gateway</div><div class="box-desc">認証・レート制御・ルーティングを一元管理</div></div>
+            <div class="box em"><div class="box-name">アプリケーションサーバー</div><div class="box-desc">ビジネスロジック / 非同期ジョブ</div></div>
+          </div>
+        </div>
+
+        <div class="arrow-row">
+          <div class="arrow-space"></div>
+          <div class="arrows">
+            <svg viewBox="0 0 24 32" style="height: 32px;"><path d="M12 2 v22 M6 18 l6 7 6 -7" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="tier-label">Data</div>
+          <div class="boxes">
+            <div class="box"><div class="box-name">RDB</div><div class="box-desc">PostgreSQL(マルチAZ)</div></div>
+            <div class="box"><div class="box-name">キャッシュ</div><div class="box-desc">Redis</div></div>
+            <div class="box"><div class="box-name">ストレージ</div><div class="box-desc">S3 互換</div></div>
+            <div class="box"><div class="box-name">分析基盤</div><div class="box-desc">DWH / BI</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑲ 課題提起型(チャコール×レッド、問いかけ)
+使うべきタイミング: プレゼン序盤で聴衆の課題意識を喚起したいとき。「こんな悩みありませんか」「問題提起」系。次のスライドで解決策を出す前振り。
+向かないケース: 解決策の提示(→ソリューション型・対比型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>課題提起型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #1c1c1e; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #1c1917; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+  .slide-inner { height: 100%; padding: 60px 84px; display: flex; flex-direction: column; position: relative; z-index: 1; }
+  .big-q {
+    position: absolute; top: -60px; right: 30px;
+    font-family: 'Inter', sans-serif; font-size: 460px; font-weight: 800;
+    color: rgba(248, 113, 113, 0.06); line-height: 1;
+    pointer-events: none;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: #f87171; text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: #e7e5e4; }
+  .hero { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .hero-title {
+    font-size: 52px; font-weight: 900; color: #fafaf9;
+    line-height: 1.5; margin-bottom: 40px;
+  }
+  .hero-title em { font-style: normal; color: #f87171; }
+  .pains { display: flex; gap: 20px; }
+  .pain {
+    flex: 1;
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(248, 113, 113, 0.25);
+    border-radius: 14px;
+    padding: 22px 24px;
+  }
+  .pain-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .pain-num { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; color: #f87171; }
+  .pain-title { font-size: 17px; font-weight: 700; color: #e7e5e4; }
+  .pain-desc { font-size: 13.5px; line-height: 1.8; color: #a8a29e; }
+  .footer-note { font-size: 14px; color: #78716c; margin-top: 36px; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="big-q">?</div>
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Problem</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可(白抜き推奨) -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#f87171" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#f87171"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1 class="hero-title">なぜ、業務改善は<br><em>3ヶ月で頓挫</em>するのか。</h1>
+
+        <div class="pains">
+          <div class="pain">
+            <div class="pain-head"><span class="pain-num">01</span><span class="pain-title">現場が使ってくれない</span></div>
+            <p class="pain-desc">ツールを入れても定着せず、結局元のExcelに逆戻り。</p>
+          </div>
+          <div class="pain">
+            <div class="pain-head"><span class="pain-num">02</span><span class="pain-title">効果が見えない</span></div>
+            <p class="pain-desc">投資対効果を測る指標がなく、継続判断ができない。</p>
+          </div>
+          <div class="pain">
+            <div class="pain-head"><span class="pain-num">03</span><span class="pain-title">推進者が疲弊する</span></div>
+            <p class="pain-desc">兼任担当者に負荷が集中し、改善活動自体が止まる。</p>
+          </div>
+        </div>
+
+        <p class="footer-note">— この3つの壁を越える仕組みを、私たちはご用意しています。</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

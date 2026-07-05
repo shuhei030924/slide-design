@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㉖ ピラミッド型(白×ネイビー、階層三角形)
+使うべきタイミング: 理念→戦略→施策のような階層構造、優先度のピラミッド、段階的な積み上げを示したいとき。
+向かないケース: 上下関係のない並列項目(→3カード型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>ピラミッド型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #fbfcfe; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #1e293b; --accent: #334155; --text: #475569; }
+  .slide-inner { height: 100%; padding: 56px 76px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: #64748b; text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 38px; font-weight: 900; color: var(--main); margin-bottom: 10px; }
+  .body { flex: 1; display: flex; align-items: center; gap: 30px; }
+  .pyramid { flex: 1; }
+  .layers { flex: 1.1; display: flex; flex-direction: column; gap: 16px; }
+  .layer { display: flex; gap: 16px; align-items: flex-start; padding: 18px 22px; border-radius: 14px; background: #ffffff; border: 1px solid #e2e8f0; }
+  .layer-bar { width: 6px; align-self: stretch; border-radius: 3px; flex-shrink: 0; }
+  .layer-title { font-size: 18px; font-weight: 700; color: var(--main); margin-bottom: 4px; }
+  .layer-desc { font-size: 13.5px; line-height: 1.75; color: var(--text); }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Value Structure</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#334155"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">ブランドを支える3層構造</h1>
+
+      <div class="body">
+        <div class="pyramid">
+          <!--
+            ピラミッド (viewBox 0 0 480 420): 頂点(240,20)、底辺 y=400、左(40,400) 右(440,400)
+            3分割: 上段 y=20〜150、中段 y=162〜276、下段 y=288〜400
+            各段の左右端は三角形の斜辺に沿って計算: x = 240 ± (y-20)/380*200
+          -->
+          <svg viewBox="0 0 480 420" style="width: 100%;">
+            <!-- 上段(頂点〜y150): 底辺半幅 = 130/380*200 ≈ 68 -->
+            <polygon points="240,20 308,150 172,150" fill="#1e293b"/>
+            <!-- 中段(y162〜276): 半幅 74〜135 -->
+            <polygon points="165,162 315,162 375,276 105,276" fill="#475569"/>
+            <!-- 下段(y288〜400): 半幅 141〜200 -->
+            <polygon points="99,288 381,288 440,400 40,400" fill="#94a3b8"/>
+            <text x="240" y="118" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff">理念</text>
+            <text x="240" y="212" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff">ブランド体験</text>
+            <text x="240" y="332" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff">日々のプロダクト品質</text>
+            <text x="240" y="356" text-anchor="middle" font-size="12" fill="#f1f5f9">すべての土台</text>
+          </svg>
+        </div>
+
+        <div class="layers">
+          <div class="layer">
+            <span class="layer-bar" style="background: #1e293b;"></span>
+            <div>
+              <div class="layer-title">理念 — なぜやるのか</div>
+              <p class="layer-desc">「働くすべての人に、創造的な時間を」。全判断の最上位に置く原点。</p>
+            </div>
+          </div>
+          <div class="layer">
+            <span class="layer-bar" style="background: #475569;"></span>
+            <div>
+              <div class="layer-title">ブランド体験 — どう感じてもらうか</div>
+              <p class="layer-desc">導入から日々の利用まで、一貫した「驚くほど簡単」な体験を設計。</p>
+            </div>
+          </div>
+          <div class="layer">
+            <span class="layer-bar" style="background: #94a3b8;"></span>
+            <div>
+              <div class="layer-title">プロダクト品質 — 何で証明するか</div>
+              <p class="layer-desc">稼働率99.9%・週次アップデート。信頼の土台を毎日積み上げる。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

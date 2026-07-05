@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑱ 沿革・ヒストリー型(セピア×ブラウン、縦タイムライン)
+使うべきタイミング: 会社沿革・プロジェクトの歩み・成長の軌跡など、過去から現在への歴史を語りたいとき。
+向かないケース: 未来の計画(→ロードマップ型へ)、手順説明(→フロー型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>沿革型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #faf6f0; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #44403c; --accent: #92400e; --text: #57534e; }
+  .slide-inner { height: 100%; padding: 56px 80px; display: flex; gap: 64px; }
+  .left { flex: 0 0 330px; display: flex; flex-direction: column; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; }
+  .slide-title { font-size: 42px; font-weight: 900; color: var(--main); line-height: 1.4; }
+  .left-note { font-size: 14.5px; line-height: 2.0; color: var(--text); margin-top: 22px; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; margin-top: auto; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+
+  .timeline { flex: 1; position: relative; padding-left: 36px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 7px; top: 24px; bottom: 24px;
+    width: 2px; background: #e0d5c5;
+  }
+  .event { position: relative; }
+  .event::before {
+    content: ""; position: absolute; left: -36px; top: 8px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #faf6f0; border: 3px solid var(--accent);
+  }
+  .event.now::before { background: var(--accent); }
+  .event-year { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 0.1em; color: var(--accent); }
+  .event-title { font-size: 19px; font-weight: 700; color: var(--main); margin: 3px 0 4px; }
+  .event-desc { font-size: 13.5px; line-height: 1.7; color: var(--text); }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="left">
+        <span class="kicker">History</span>
+        <h1 class="slide-title">10年の歩みが、<br>信頼の証。</h1>
+        <p class="left-note">小さな受託開発から始まった私たちは、お客様とともに成長し、今では業界をリードするプロダクトカンパニーへ。</p>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#92400e" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#92400e"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="event">
+          <div class="event-year">2016</div>
+          <div class="event-title">創業</div>
+          <div class="event-desc">エンジニア3名で受託開発からスタート。</div>
+        </div>
+        <div class="event">
+          <div class="event-year">2019</div>
+          <div class="event-title">自社プロダクトをリリース</div>
+          <div class="event-desc">受託で培った知見を活かしSaaS事業へ転換。初年度で100社が導入。</div>
+        </div>
+        <div class="event">
+          <div class="event-year">2022</div>
+          <div class="event-title">シリーズB調達・組織拡大</div>
+          <div class="event-desc">15億円を調達し、開発・CS体制を3倍に増強。</div>
+        </div>
+        <div class="event">
+          <div class="event-year">2024</div>
+          <div class="event-title">導入1,000社を突破</div>
+          <div class="event-desc">エンタープライズ領域に本格参入。業界シェア2位に。</div>
+        </div>
+        <div class="event now">
+          <div class="event-year">2026</div>
+          <div class="event-title">海外展開を開始</div>
+          <div class="event-desc">アジア3カ国でサービス提供を開始。次の10年へ。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

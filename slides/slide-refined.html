@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ① コンセプト型(ダーク×ミニマル)
+使うべきタイミング: 表紙・ビジョン・ブランドコンセプトなど、抽象的なメッセージを1つだけ届けたいとき。テック/デザイン系の聴衆向け。
+向かないケース: 具体的なデータ・手順・比較の説明
+-->
+<head>
+<meta charset="UTF-8">
+<title>Design, Refined.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600;900&family=Inter:wght@200;300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #1c1c1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #0b0f1e 0%, #101830 55%, #0d1226 100%);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ===== 背景装飾 ===== */
+  .aurora {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+  }
+  .aurora-1 {
+    width: 620px; height: 620px;
+    top: -260px; right: -140px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.35), transparent 65%);
+  }
+  .aurora-2 {
+    width: 520px; height: 520px;
+    bottom: -240px; left: -120px;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.18), transparent 65%);
+  }
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+
+  /* ===== レイアウト ===== */
+  .slide-inner {
+    position: relative;
+    height: 100%;
+    padding: 72px 88px 64px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  /* 上部: アイライン(左)+ロゴ(右) */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  /* 会社ロゴ: img はコンテナ内に収まるよう自動調整 */
+  .logo {
+    height: 40px;
+    max-width: 220px;
+    display: flex;
+    align-items: center;
+  }
+  .logo img, .logo svg {
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .logo-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.12em;
+    color: #dfe3f5;
+  }
+  .eyebrow-line {
+    width: 64px;
+    height: 1px;
+    background: linear-gradient(90deg, #6366f1, transparent);
+  }
+  .eyebrow-label {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.5em;
+    color: #6b7599;
+    text-transform: uppercase;
+  }
+
+  /* 中央: タイトル */
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-title-en {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: 88px;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    color: #f4f5fa;
+  }
+  .hero-title-en em {
+    font-style: normal;
+    font-weight: 600;
+    background: linear-gradient(120deg, #818cf8 0%, #5eead4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-title-ja {
+    font-family: 'Zen Old Mincho', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.28em;
+    color: #aeb6d8;
+    margin-top: 30px;
+  }
+  .hero-desc {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 2.1;
+    letter-spacing: 0.08em;
+    color: #7d87ad;
+    margin-top: 26px;
+    max-width: 560px;
+  }
+
+  /* 右下: 幾何学オブジェ (SVG) */
+  .ornament {
+    position: absolute;
+    right: 96px;
+    bottom: 120px;
+    width: 340px;
+    height: 340px;
+  }
+
+  /* 下部: フッター */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 22px;
+  }
+  .footer-left {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: #565f82;
+  }
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: #565f82;
+  }
+  .footer-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(120deg, #818cf8, #5eead4);
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="grid-lines"></div>
+
+    <!-- 幾何学オブジェ: 同心円+軌道 -->
+    <svg class="ornament" viewBox="0 0 340 340" fill="none">
+      <defs>
+        <linearGradient id="ring" x1="0" y1="0" x2="340" y2="340">
+          <stop offset="0%" stop-color="#818cf8"/>
+          <stop offset="100%" stop-color="#5eead4"/>
+        </linearGradient>
+      </defs>
+      <circle cx="170" cy="170" r="150" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <circle cx="170" cy="170" r="112" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="2 7"/>
+      <circle cx="170" cy="170" r="74" stroke="url(#ring)" stroke-width="1.5" opacity="0.85"/>
+      <circle cx="170" cy="170" r="36" fill="rgba(129,140,248,0.10)" stroke="rgba(129,140,248,0.45)" stroke-width="1"/>
+      <!-- 軌道上の点 -->
+      <circle cx="276"  cy="64"  r="5"   fill="#5eead4"/>
+      <circle cx="58"   cy="170" r="3.5" fill="#818cf8"/>
+      <circle cx="170"  cy="320" r="2.5" fill="#8b95c9"/>
+      <!-- 十字マーカー -->
+      <path d="M170 158 v24 M158 170 h24" stroke="#c7cdf0" stroke-width="1"/>
+    </svg>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <div class="eyebrow">
+          <span class="eyebrow-label">Concept</span>
+          <span class="eyebrow-line"></span>
+        </div>
+
+        <!-- ★会社ロゴ: 画像がある場合は下のSVGを削除して
+             <img src="../images/logo.png" alt="会社ロゴ"> に差し替える -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 36px; margin-right: 10px;">
+            <defs>
+              <linearGradient id="logo-g" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#818cf8"/>
+                <stop offset="100%" stop-color="#5eead4"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 4 L36 32 H4 Z" stroke="url(#logo-g)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="url(#logo-g)"/>
+          </svg>
+          <span class="logo-text">YOUR&nbsp;LOGO</span>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1 class="hero-title-en">Design,<br><em>Refined.</em></h1>
+        <p class="hero-title-ja">余白がかたちを語り、静けさが伝える。</p>
+        <p class="hero-desc">
+          削ぎ落とすことで、本質が浮かび上がる。<br>
+          ひとつの画面に込めるのは、装飾ではなく意図。
+        </p>
+      </div>
+
+      <div class="footer">
+        <span class="footer-left">SLIDE DESIGN STUDIO</span>
+        <span class="footer-right"><span class="footer-dot"></span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

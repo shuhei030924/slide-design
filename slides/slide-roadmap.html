@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑧ ロードマップ型(ライト×インディゴ)
+使うべきタイミング: 年間計画・中期計画・プロダクトロードマップなど、Q1〜Q4等の時間軸でマイルストーンを示したいとき。
+向かないケース: 手順の説明(→フロー型へ。ロードマップは「いつ」、フローは「どうやって」)
+-->
+<head>
+<meta charset="UTF-8">
+<title>ロードマップ型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: #fafaff;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  }
+  :root {
+    --main: #1e1b4b;
+    --accent: #4f46e5;
+    --accent-l: #a5b4fc;
+    --text: #52525b;
+  }
+  .deco-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(79,70,229,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,70,229,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none;
+  }
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 60px 76px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.35em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo img, .logo svg { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+
+  .slide-title { font-size: 42px; font-weight: 900; color: var(--main); margin-bottom: 6px; }
+  .slide-lead { font-size: 17px; color: var(--text); margin-bottom: 20px; }
+
+  .timeline { flex: 1; position: relative; display: flex; align-items: center; }
+  .tl-svg { width: 100%; }
+  .milestones {
+    position: absolute; inset: 0;
+    display: flex;
+  }
+  .ms { flex: 1; position: relative; padding: 0 16px; }
+  .ms-card {
+    position: absolute; left: 16px; right: 16px;
+    background: #ffffff;
+    border: 1px solid #e4e4f4;
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 4px 16px rgba(30, 27, 75, 0.07);
+  }
+  .ms:nth-child(odd) .ms-card { bottom: 58%; }
+  .ms:nth-child(even) .ms-card { top: 58%; }
+  .ms-q {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.15em;
+    color: #ffffff; background: var(--accent);
+    padding: 4px 12px; border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .ms:last-child .ms-q { background: var(--main); }
+  .ms-title { font-size: 19px; font-weight: 700; color: var(--main); margin-bottom: 6px; }
+  .ms-desc { font-size: 13.5px; line-height: 1.7; color: var(--text); }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco-grid"></div>
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Roadmap 2026</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="#4f46e5" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="#4f46e5"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">プロダクトロードマップ</h1>
+      <p class="slide-lead">2026年、4つのフェーズで事業を拡大します。</p>
+
+      <div class="timeline">
+        <!-- 中央ライン -->
+        <svg class="tl-svg" viewBox="0 0 1128 40">
+          <line x1="20" y1="20" x2="1080" y2="20" stroke="#c7d2fe" stroke-width="3"/>
+          <path d="M1080 12 l16 8 -16 8 Z" fill="#c7d2fe"/>
+          <circle cx="141"  cy="20" r="11" fill="#4f46e5"/>
+          <circle cx="423"  cy="20" r="11" fill="#4f46e5"/>
+          <circle cx="705"  cy="20" r="11" fill="#4f46e5"/>
+          <circle cx="987"  cy="20" r="11" fill="#1e1b4b"/>
+          <circle cx="141"  cy="20" r="4.5" fill="#ffffff"/>
+          <circle cx="423"  cy="20" r="4.5" fill="#ffffff"/>
+          <circle cx="705"  cy="20" r="4.5" fill="#ffffff"/>
+          <circle cx="987"  cy="20" r="4.5" fill="#ffffff"/>
+        </svg>
+
+        <div class="milestones">
+          <div class="ms">
+            <div class="ms-card">
+              <span class="ms-q">Q1</span>
+              <h2 class="ms-title">基盤刷新</h2>
+              <p class="ms-desc">インフラを刷新し、開発速度と安定性を向上</p>
+            </div>
+          </div>
+          <div class="ms">
+            <div class="ms-card">
+              <span class="ms-q">Q2</span>
+              <h2 class="ms-title">AI機能リリース</h2>
+              <p class="ms-desc">自動化アシスタントを全プランに提供開始</p>
+            </div>
+          </div>
+          <div class="ms">
+            <div class="ms-card">
+              <span class="ms-q">Q3</span>
+              <h2 class="ms-title">海外展開</h2>
+              <p class="ms-desc">英語版をリリースし、アジア3カ国に展開</p>
+            </div>
+          </div>
+          <div class="ms">
+            <div class="ms-card">
+              <span class="ms-q">Q4</span>
+              <h2 class="ms-title">プラットフォーム化</h2>
+              <p class="ms-desc">外部連携APIを公開し、エコシステムを構築</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

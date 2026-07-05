@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑭ 組織図型(白×インディゴ、SVGツリー)
+使うべきタイミング: 体制図・組織構成・プロジェクト体制など、階層関係を示したいとき。「体制図」「組織図」「チーム構成」系の依頼。
+向かないケース: 階層のない並列項目(→3カード型へ)、時系列(→フロー型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>組織図型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #ffffff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #312e81; --accent: #6366f1; --text: #475569; }
+  .slide-inner { height: 100%; padding: 56px 72px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 40px; font-weight: 900; color: var(--main); margin-bottom: 16px; }
+  .chart { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Organization</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#6366f1" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#6366f1"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">プロジェクト推進体制</h1>
+
+      <div class="chart">
+        <!--
+          組織図SVG (viewBox 0 0 1100 470):
+          L1: 中央 x=550, box 220x64 → x=440, y=16
+          L2: 3箱 240x64, 中心 x=200/550/900 → x=80/430/780, y=170
+          L3: L2の下に各1箱 240x56, y=320
+          縦線: L1下(80)→分岐線y=120→L2上(170)
+        -->
+        <svg viewBox="0 0 1100 470" style="width: 100%; height: 100%;">
+          <!-- 接続線 -->
+          <line x1="550" y1="80" x2="550" y2="125" stroke="#c7d2fe" stroke-width="2"/>
+          <line x1="200" y1="125" x2="900" y2="125" stroke="#c7d2fe" stroke-width="2"/>
+          <line x1="200" y1="125" x2="200" y2="170" stroke="#c7d2fe" stroke-width="2"/>
+          <line x1="550" y1="125" x2="550" y2="170" stroke="#c7d2fe" stroke-width="2"/>
+          <line x1="900" y1="125" x2="900" y2="170" stroke="#c7d2fe" stroke-width="2"/>
+          <line x1="200" y1="234" x2="200" y2="320" stroke="#e0e7ff" stroke-width="2"/>
+          <line x1="550" y1="234" x2="550" y2="320" stroke="#e0e7ff" stroke-width="2"/>
+          <line x1="900" y1="234" x2="900" y2="320" stroke="#e0e7ff" stroke-width="2"/>
+
+          <!-- L1 -->
+          <rect x="440" y="16" width="220" height="64" rx="12" fill="#312e81"/>
+          <text x="550" y="42" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">プロジェクトオーナー</text>
+          <text x="550" y="66" text-anchor="middle" font-size="13" fill="#c7d2fe">代表取締役</text>
+
+          <!-- L2 -->
+          <rect x="80" y="170" width="240" height="64" rx="12" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="200" y="196" text-anchor="middle" font-size="16" font-weight="700" fill="#312e81">開発チーム</text>
+          <text x="200" y="220" text-anchor="middle" font-size="13" fill="#64748b">エンジニア 6名</text>
+
+          <rect x="430" y="170" width="240" height="64" rx="12" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="550" y="196" text-anchor="middle" font-size="16" font-weight="700" fill="#312e81">事業推進チーム</text>
+          <text x="550" y="220" text-anchor="middle" font-size="13" fill="#64748b">企画・営業 4名</text>
+
+          <rect x="780" y="170" width="240" height="64" rx="12" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="900" y="196" text-anchor="middle" font-size="16" font-weight="700" fill="#312e81">品質管理チーム</text>
+          <text x="900" y="220" text-anchor="middle" font-size="13" fill="#64748b">QA・保守 3名</text>
+
+          <!-- L3 -->
+          <rect x="80" y="320" width="240" height="56" rx="12" fill="#fafafe" stroke="#c7d2fe" stroke-width="1.5"/>
+          <text x="200" y="353" text-anchor="middle" font-size="14" fill="#475569">外部パートナー(開発)</text>
+
+          <rect x="430" y="320" width="240" height="56" rx="12" fill="#fafafe" stroke="#c7d2fe" stroke-width="1.5"/>
+          <text x="550" y="353" text-anchor="middle" font-size="14" fill="#475569">マーケティング支援会社</text>
+
+          <rect x="780" y="320" width="240" height="56" rx="12" fill="#fafafe" stroke="#c7d2fe" stroke-width="1.5"/>
+          <text x="900" y="353" text-anchor="middle" font-size="14" fill="#475569">監査法人</text>
+
+          <text x="550" y="440" text-anchor="middle" font-size="14" fill="#94a3b8">総勢 13名 + 外部パートナー3社の推進体制</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ④ KPIデータ型(ダーク×グリーン)
+使うべきタイミング: 売上・導入数・継続率など2〜3個の重要数値を大きく見せてインパクトを与えたいとき。決算・実績報告のハイライト。
+向かないケース: 時系列の推移を見せたい(→グラフ型へ)、4個以上の数値羅列
+-->
+<head>
+<meta charset="UTF-8">
+<title>KPIデータ強調スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #1c1c1e;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: #0c1222;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+  /* 背景装飾 */
+  .glow {
+    position: absolute; border-radius: 50%;
+    filter: blur(100px); pointer-events: none;
+  }
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 60px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 44px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.4em;
+    color: #34d399; text-transform: uppercase;
+  }
+  /* ★会社ロゴ */
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo img, .logo svg { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: #e2e8f0; }
+
+  .slide-title {
+    font-size: 40px; font-weight: 700;
+    color: #f1f5f9; line-height: 1.4;
+    margin-bottom: 48px;
+  }
+  .slide-title em {
+    font-style: normal;
+    background: linear-gradient(120deg, #34d399, #38bdf8);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-weight: 700;
+  }
+
+  .kpi-row { flex: 1; display: flex; gap: 36px; align-items: flex-start; }
+  .kpi {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 20px;
+    padding: 40px 36px;
+  }
+  .kpi-label {
+    font-size: 15px; font-weight: 500;
+    color: #94a3b8; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .kpi-label::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: linear-gradient(120deg, #34d399, #38bdf8);
+  }
+  .kpi-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 64px; font-weight: 800; line-height: 1;
+    color: #f8fafc; letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .kpi-value span { font-size: 28px; font-weight: 600; color: #64748b; margin-left: 6px; }
+  .kpi-note { font-size: 14px; color: #64748b; margin-top: 18px; line-height: 1.7; }
+  .kpi-trend {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 600;
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.12);
+    padding: 6px 14px; border-radius: 999px;
+  }
+  .footer {
+    font-size: 12px; color: #475569;
+    letter-spacing: 0.15em;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="glow" style="width: 500px; height: 500px; top: -220px; left: -120px; background: rgba(52, 211, 153, 0.14);"></div>
+    <div class="glow" style="width: 500px; height: 500px; bottom: -240px; right: -140px; background: rgba(56, 189, 248, 0.13);"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">2026 Q2 Results</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <defs>
+              <linearGradient id="lg" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#34d399"/><stop offset="100%" stop-color="#38bdf8"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 4 L36 32 H4 Z" stroke="url(#lg)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="url(#lg)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">事業成長は、<em>過去最高</em>を更新。</h1>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">売上高</div>
+          <div class="kpi-value">128<span>億円</span></div>
+          <div class="kpi-trend">▲ 前年比 +32%</div>
+          <p class="kpi-note">主力事業の拡大と新規領域の立ち上げが牽引</p>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">導入企業数</div>
+          <div class="kpi-value">2,400<span>社</span></div>
+          <div class="kpi-trend">▲ 前年比 +48%</div>
+          <p class="kpi-note">エンタープライズ領域での採用が加速</p>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">継続率</div>
+          <div class="kpi-value">99.2<span>%</span></div>
+          <div class="kpi-trend">▲ 過去最高値</div>
+          <p class="kpi-note">カスタマーサクセス体制の強化が寄与</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

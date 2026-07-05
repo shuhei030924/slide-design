@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑳ ソリューション全体像型(ライト×バイオレット、中心円+周辺)
+使うべきタイミング: サービスの全体像・提供価値マップなど、中心となる価値と周辺要素の関係を一望させたいとき。非技術者向けの概念図。
+向かないケース: 技術的な構成(→システム構成図型へ)、階層関係(→組織図型へ)
+-->
+<head>
+<meta charset="UTF-8">
+<title>ソリューション全体像型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #fcfbff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #4c1d95; --accent: #8b5cf6; --text: #52525b; }
+  .slide-inner { height: 100%; padding: 56px 72px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 38px; font-weight: 900; color: var(--main); margin-bottom: 8px; }
+  .diagram { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Solution Map</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#8b5cf6" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#8b5cf6"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">1つのプラットフォームで、業務のすべてを。</h1>
+
+      <div class="diagram">
+        <!--
+          ハブ&スポーク図 (viewBox 0 0 1100 480):
+          中心円: (550, 240) r=105
+          周辺4ノード(180x76, rx14): 左上(150,60) 右上(770,60) 左下(150,340) 右下(770,340)
+          線: 中心から各ノードの内側の辺の中点へ
+        -->
+        <svg viewBox="0 0 1100 480" style="width: 100%; height: 100%;">
+          <defs>
+            <linearGradient id="hub-g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#6d28d9"/>
+            </linearGradient>
+          </defs>
+          <!-- 接続線 -->
+          <line x1="470" y1="185" x2="330" y2="106" stroke="#ddd6fe" stroke-width="2.5"/>
+          <line x1="630" y1="185" x2="770" y2="106" stroke="#ddd6fe" stroke-width="2.5"/>
+          <line x1="470" y1="295" x2="330" y2="372" stroke="#ddd6fe" stroke-width="2.5"/>
+          <line x1="630" y1="295" x2="770" y2="372" stroke="#ddd6fe" stroke-width="2.5"/>
+
+          <!-- 中心 -->
+          <circle cx="550" cy="240" r="105" fill="url(#hub-g)"/>
+          <text x="550" y="228" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">YOUR</text>
+          <text x="550" y="258" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">PLATFORM</text>
+
+          <!-- 左上: データ統合 -->
+          <rect x="150" y="60" width="180" height="76" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="2"/>
+          <text x="240" y="93" text-anchor="middle" font-size="16" font-weight="700" fill="#4c1d95">データ統合</text>
+          <text x="240" y="117" text-anchor="middle" font-size="12" fill="#78716c">全システムを自動連携</text>
+
+          <!-- 右上: 自動化 -->
+          <rect x="770" y="60" width="180" height="76" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="2"/>
+          <text x="860" y="93" text-anchor="middle" font-size="16" font-weight="700" fill="#4c1d95">業務自動化</text>
+          <text x="860" y="117" text-anchor="middle" font-size="12" fill="#78716c">定型作業をゼロに</text>
+
+          <!-- 左下: 可視化 -->
+          <rect x="150" y="340" width="180" height="76" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="2"/>
+          <text x="240" y="373" text-anchor="middle" font-size="16" font-weight="700" fill="#4c1d95">リアルタイム可視化</text>
+          <text x="240" y="397" text-anchor="middle" font-size="12" fill="#78716c">経営数値を常に最新に</text>
+
+          <!-- 右下: コラボ -->
+          <rect x="770" y="340" width="180" height="76" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="2"/>
+          <text x="860" y="373" text-anchor="middle" font-size="16" font-weight="700" fill="#4c1d95">チーム連携</text>
+          <text x="860" y="397" text-anchor="middle" font-size="12" fill="#78716c">部門を越えて共有</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㉝ まとめ・チェックリスト型(白×グリーン、要点の再確認)
+使うべきタイミング: 資料の終盤で要点を再確認させたいとき。「まとめ」「本日のポイント」「押さえるべきこと」系の依頼。
+向かないケース: 新しい情報の提示(まとめは既出内容の再掲に徹する)
+-->
+<head>
+<meta charset="UTF-8">
+<title>まとめ型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #e5e7eb; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .slide { width: 1280px; height: 720px; overflow: hidden; position: relative; background: #ffffff; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+  :root { --main: #14532d; --accent: #16a34a; --text: #475569; }
+  .side-band { position: absolute; left: 0; top: 0; width: 14px; height: 100%; background: linear-gradient(180deg, #16a34a, #4ade80); }
+  .slide-inner { height: 100%; padding: 56px 72px 50px 84px; display: flex; flex-direction: column; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .kicker { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.35em; color: var(--accent); text-transform: uppercase; }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo svg, .logo img { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+  .slide-title { font-size: 40px; font-weight: 900; color: var(--main); margin-bottom: 30px; }
+  .checks { flex: 1; display: flex; flex-direction: column; gap: 18px; }
+  .check {
+    display: flex; gap: 20px; align-items: center;
+    background: #f0fdf4; border-radius: 16px;
+    padding: 22px 30px;
+  }
+  .check-icon {
+    flex-shrink: 0;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .check-title { font-size: 20px; font-weight: 700; color: var(--main); }
+  .check-desc { font-size: 14px; color: var(--text); margin-top: 3px; }
+  .next {
+    margin-top: 26px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--main); border-radius: 16px;
+    padding: 22px 32px;
+  }
+  .next-text { font-size: 19px; font-weight: 700; color: #ffffff; }
+  .next-sub { font-size: 13px; color: #86efac; margin-top: 3px; }
+  .next-contact { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="side-band"></div>
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Summary</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;"><path d="M20 4 L36 32 H4 Z" stroke="#16a34a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="24" r="5" fill="#16a34a"/></svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">本日のポイント</h1>
+
+      <div class="checks">
+        <div class="check">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 24px;"><path d="M4 12 l5 5 L20 7"/></svg>
+          </div>
+          <div>
+            <div class="check-title">業務時間を40%削減できる</div>
+            <div class="check-desc">定型業務の自動化により、月160時間を創出。</div>
+          </div>
+        </div>
+        <div class="check">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 24px;"><path d="M4 12 l5 5 L20 7"/></svg>
+          </div>
+          <div>
+            <div class="check-title">最短2週間・初期費用0円で始められる</div>
+            <div class="check-desc">スモールスタートでリスクなく効果を検証。</div>
+          </div>
+        </div>
+        <div class="check">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 24px;"><path d="M4 12 l5 5 L20 7"/></svg>
+          </div>
+          <div>
+            <div class="check-title">2,400社の実績と専任サポート</div>
+            <div class="check-desc">導入から定着まで、成果に至るまで伴走します。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="next">
+        <div>
+          <div class="next-text">次のステップ: 無料トライアルのお申し込み</div>
+          <div class="next-sub">お申し込みから3営業日でご利用開始いただけます</div>
+        </div>
+        <div class="next-contact">example.com/trial</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

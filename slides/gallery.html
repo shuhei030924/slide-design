@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>スライドパターン一覧</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f1f5f9;
+    padding: 48px 56px;
+  }
+  h1 { font-size: 28px; font-weight: 900; color: #0f172a; margin-bottom: 6px; }
+  .lead { font-size: 14px; color: #64748b; margin-bottom: 36px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1400px;
+  }
+  .item {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+  .item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15); }
+  .item img { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover; }
+  .caption { padding: 14px 18px; }
+  .caption .name { font-size: 15px; font-weight: 700; color: #0f172a; }
+  .caption .desc { font-size: 12.5px; color: #64748b; margin-top: 3px; }
+</style>
+</head>
+<body>
+  <h1>スライドパターン一覧(全33種)</h1>
+  <p class="lead">クリックでHTML本体を開けます。プレビュー画像は slides/previews/ に保存済み。</p>
+  <div class="grid">
+    <a class="item" href="./slide-refined.html">
+      <img src="./previews/slide-refined.png" alt="コンセプト型">
+      <div class="caption"><div class="name">① コンセプト型</div><div class="desc">ダーク×ミニマル。表紙・ビジョン提示に</div></div>
+    </a>
+    <a class="item" href="./slide-business.html">
+      <img src="./previews/slide-business.png" alt="ビジネス型">
+      <div class="caption"><div class="name">② ビジネス型</div><div class="desc">白×ネイビー。箇条書き+Before/After図解</div></div>
+    </a>
+    <a class="item" href="./slide-cards.html">
+      <img src="./previews/slide-cards.png" alt="3カード型">
+      <div class="caption"><div class="name">③ 3カード型</div><div class="desc">パープル。特徴・強みの比較訴求に</div></div>
+    </a>
+    <a class="item" href="./slide-kpi.html">
+      <img src="./previews/slide-kpi.png" alt="KPI型">
+      <div class="caption"><div class="name">④ KPIデータ型</div><div class="desc">ダーク×グリーン。数字の強調・実績報告に</div></div>
+    </a>
+    <a class="item" href="./slide-casual.html">
+      <img src="./previews/slide-casual.png" alt="カジュアル型">
+      <div class="caption"><div class="name">⑤ カジュアル型</div><div class="desc">クリーム×オレンジ。サービス紹介・toC向け</div></div>
+    </a>
+    <a class="item" href="./slide-flow.html">
+      <img src="./previews/slide-flow.png" alt="プロセスフロー型">
+      <div class="caption"><div class="name">⑥ プロセスフロー型</div><div class="desc">白×ティール。手順・導入ステップの説明に</div></div>
+    </a>
+    <a class="item" href="./slide-message.html">
+      <img src="./previews/slide-message.png" alt="和モダン型">
+      <div class="caption"><div class="name">⑦ 和モダン・メッセージ型</div><div class="desc">明朝×朱色。理念・ブランドメッセージに</div></div>
+    </a>
+    <a class="item" href="./slide-roadmap.html">
+      <img src="./previews/slide-roadmap.png" alt="ロードマップ型">
+      <div class="caption"><div class="name">⑧ ロードマップ型</div><div class="desc">インディゴ。計画・タイムラインの提示に</div></div>
+    </a>
+    <a class="item" href="./slide-versus.html">
+      <img src="./previews/slide-versus.png" alt="対比型">
+      <div class="caption"><div class="name">⑨ 対比型 (Before/After)</div><div class="desc">ローズ。課題と解決の対比訴求に</div></div>
+    </a>    <a class="item" href="./slide-chart.html">
+      <img src="./previews/slide-chart.png" alt="グラフ型">
+      <div class="caption"><div class="name">⑩ グラフ・チャート型</div><div class="desc">ブルー。SVG棒グラフ+考察ノート。業績報告に</div></div>
+    </a>
+    <a class="item" href="./slide-matrix.html">
+      <img src="./previews/slide-matrix.png" alt="マトリクス型">
+      <div class="caption"><div class="name">⑪ 2×2マトリクス型</div><div class="desc">アンバー。戦略整理・優先順位付けに</div></div>
+    </a>
+    <a class="item" href="./slide-agenda.html">
+      <img src="./previews/slide-agenda.png" alt="アジェンダ型">
+      <div class="caption"><div class="name">⑫ アジェンダ型</div><div class="desc">ブルー2パネル。目次・議題の提示に</div></div>
+    </a>
+    <a class="item" href="./slide-voice.html">
+      <img src="./previews/slide-voice.png" alt="お客様の声型">
+      <div class="caption"><div class="name">⑬ お客様の声型</div><div class="desc">グリーン。導入事例・推薦コメントの紹介に</div></div>
+    </a>
+    <a class="item" href="./slide-org.html">
+      <img src="./previews/slide-org.png" alt="組織図型">
+      <div class="caption"><div class="name">⑭ 組織図型</div><div class="desc">インディゴ。体制図・階層構造の提示に</div></div>
+    </a>
+    <a class="item" href="./slide-architecture.html">
+      <img src="./previews/slide-architecture.png" alt="システム構成図型">
+      <div class="caption"><div class="name">⑮ システム構成図型</div><div class="desc">ダーク×シアン。技術アーキテクチャの説明に</div></div>
+    </a>
+    <a class="item" href="./slide-pricing.html">
+      <img src="./previews/slide-pricing.png" alt="料金プラン型">
+      <div class="caption"><div class="name">⑯ 料金プラン型</div><div class="desc">ブルー。価格体系・プラン比較に</div></div>
+    </a>
+    <a class="item" href="./slide-team.html">
+      <img src="./previews/slide-team.png" alt="チーム紹介型">
+      <div class="caption"><div class="name">⑰ チーム紹介型</div><div class="desc">ティール。メンバー・登壇者の紹介に</div></div>
+    </a>
+    <a class="item" href="./slide-history.html">
+      <img src="./previews/slide-history.png" alt="沿革型">
+      <div class="caption"><div class="name">⑱ 沿革・ヒストリー型</div><div class="desc">セピア。会社の歩み・成長の軌跡に</div></div>
+    </a>
+    <a class="item" href="./slide-problem.html">
+      <img src="./previews/slide-problem.png" alt="課題提起型">
+      <div class="caption"><div class="name">⑲ 課題提起型</div><div class="desc">ダーク×レッド。問題意識の喚起に</div></div>
+    </a>
+    <a class="item" href="./slide-solution.html">
+      <img src="./previews/slide-solution.png" alt="ソリューション全体像型">
+      <div class="caption"><div class="name">⑳ ソリューション全体像型</div><div class="desc">バイオレット。中心価値+周辺要素の一望に</div></div>
+    </a>
+    <a class="item" href="./slide-market.html">
+      <img src="./previews/slide-market.png" alt="市場規模型">
+      <div class="caption"><div class="name">㉑ 市場規模型(TAM/SAM/SOM)</div><div class="desc">スカイブルー。事業機会の提示に</div></div>
+    </a>
+    <a class="item" href="./slide-compare-table.html">
+      <img src="./previews/slide-compare-table.png" alt="競合比較表型">
+      <div class="caption"><div class="name">㉒ 競合比較表型</div><div class="desc">ネイビー。自社列強調の機能比較に</div></div>
+    </a>
+    <a class="item" href="./slide-funnel.html">
+      <img src="./previews/slide-funnel.png" alt="ファネル型">
+      <div class="caption"><div class="name">㉓ ファネル型</div><div class="desc">ティール。集客→成約の転換率分析に</div></div>
+    </a>
+    <a class="item" href="./slide-gap.html">
+      <img src="./previews/slide-gap.png" alt="ギャップ分析型">
+      <div class="caption"><div class="name">㉔ ギャップ分析型</div><div class="desc">オレンジ。現状→理想+施策の提示に</div></div>
+    </a>
+    <a class="item" href="./slide-cycle.html">
+      <img src="./previews/slide-cycle.png" alt="サイクル型">
+      <div class="caption"><div class="name">㉕ サイクル型(PDCA)</div><div class="desc">グリーン。循環プロセスの説明に</div></div>
+    </a>
+    <a class="item" href="./slide-pyramid.html">
+      <img src="./previews/slide-pyramid.png" alt="ピラミッド型">
+      <div class="caption"><div class="name">㉖ ピラミッド型</div><div class="desc">スレート。階層構造・積み上げの説明に</div></div>
+    </a>
+    <a class="item" href="./slide-gantt.html">
+      <img src="./previews/slide-gantt.png" alt="ガントチャート型">
+      <div class="caption"><div class="name">㉗ ガントチャート型</div><div class="desc">インディゴ。詳細スケジュールの提示に</div></div>
+    </a>
+    <a class="item" href="./slide-dashboard.html">
+      <img src="./previews/slide-dashboard.png" alt="ダッシュボード型">
+      <div class="caption"><div class="name">㉘ ダッシュボード型</div><div class="desc">ダーク。複数KPIの一望・月次報告に</div></div>
+    </a>
+    <a class="item" href="./slide-quote.html">
+      <img src="./previews/slide-quote.png" alt="引用型">
+      <div class="caption"><div class="name">㉙ 引用・名言型</div><div class="desc">クリーム×ゴールド。キーメッセージの強調に</div></div>
+    </a>
+    <a class="item" href="./slide-cta.html">
+      <img src="./previews/slide-cta.png" alt="CTA型">
+      <div class="caption"><div class="name">㉚ CTA・クロージング型</div><div class="desc">ブルーグラデーション。行動喚起・問い合わせに</div></div>
+    </a>
+    <a class="item" href="./slide-faq.html">
+      <img src="./previews/slide-faq.png" alt="FAQ型">
+      <div class="caption"><div class="name">㉛ FAQ型</div><div class="desc">ライトブルー。よくある質問・不安払拭に</div></div>
+    </a>
+    <a class="item" href="./slide-logos.html">
+      <img src="./previews/slide-logos.png" alt="導入実績型">
+      <div class="caption"><div class="name">㉜ 導入実績ロゴウォール型</div><div class="desc">グレー。取引先・実績による信頼性訴求に</div></div>
+    </a>
+    <a class="item" href="./slide-summary.html">
+      <img src="./previews/slide-summary.png" alt="まとめ型">
+      <div class="caption"><div class="name">㉝ まとめ・チェックリスト型</div><div class="desc">グリーン。要点再確認+次のステップに</div></div>
+    </a>
+  </div>
+</body>
+</html>

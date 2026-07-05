@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ⑬ お客様の声型(ライト×グリーン、引用カード×3)
+使うべきタイミング: 導入事例・推薦コメント・レビューなど、第三者の声で信頼性を補強したいとき。営業資料の終盤に効果的。
+向かないケース: 自社発信の主張・機能説明(引用は補強材料として使う)
+-->
+<head>
+<meta charset="UTF-8">
+<title>お客様の声型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 40%);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  }
+  :root {
+    --main: #14532d;
+    --accent: #16a34a;
+    --text: #4b5563;
+  }
+  .slide-inner {
+    height: 100%; padding: 56px 72px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.35em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo img, .logo svg { height: 100%; max-width: 100%; object-fit: contain; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--main); }
+
+  .slide-title { font-size: 40px; font-weight: 900; color: var(--main); margin-bottom: 8px; }
+  .slide-lead { font-size: 16px; color: var(--text); margin-bottom: 36px; }
+  .slide-lead strong { color: var(--accent); font-size: 19px; }
+
+  .quotes { flex: 1; display: flex; gap: 30px; align-items: stretch; }
+  .quote-card {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #dcfce7;
+    border-radius: 18px;
+    padding: 34px 30px 28px;
+    box-shadow: 0 4px 20px rgba(20, 83, 45, 0.07);
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .quote-mark {
+    position: absolute; top: -16px; left: 26px;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stars { color: #f59e0b; font-size: 16px; letter-spacing: 3px; margin-bottom: 14px; }
+  .quote-text {
+    font-size: 15.5px; line-height: 1.9;
+    color: #1f2937;
+    flex: 1;
+  }
+  .quote-person {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #f0fdf4;
+  }
+  .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; font-weight: 800; font-size: 16px;
+    color: #ffffff;
+  }
+  .person-name { font-size: 14px; font-weight: 700; color: var(--main); }
+  .person-role { font-size: 12px; color: #6b7280; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Customer Voice</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="#16a34a" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="#16a34a"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">お客様の声</h1>
+      <p class="slide-lead">導入企業満足度 <strong>96%</strong> — 現場から届いたリアルな評価をご紹介します。</p>
+
+      <div class="quotes">
+        <div class="quote-card">
+          <div class="quote-mark">
+            <svg viewBox="0 0 24 24" fill="#ffffff" style="width: 20px;"><path d="M9.6 5C6 7 4 10 4 13.6c0 2.8 1.8 4.9 4.3 4.9 2.2 0 3.9-1.7 3.9-3.9 0-2.1-1.5-3.7-3.6-3.7-.3 0-.7 0-.9.1.5-1.8 2-3.6 3.8-4.6L9.6 5zm9 0c-3.6 2-5.6 5-5.6 8.6 0 2.8 1.8 4.9 4.3 4.9 2.2 0 3.9-1.7 3.9-3.9 0-2.1-1.5-3.7-3.6-3.7-.3 0-.7 0-.9.1.5-1.8 2-3.6 3.8-4.6L18.6 5z"/></svg>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p class="quote-text">月20時間かかっていた集計作業がゼロになりました。数字の信頼性も上がり、経営会議の質が変わったと実感しています。</p>
+          <div class="quote-person">
+            <div class="avatar" style="background: #16a34a;">T</div>
+            <div>
+              <div class="person-name">田中 様</div>
+              <div class="person-role">製造業 / 経営企画部長</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-mark">
+            <svg viewBox="0 0 24 24" fill="#ffffff" style="width: 20px;"><path d="M9.6 5C6 7 4 10 4 13.6c0 2.8 1.8 4.9 4.3 4.9 2.2 0 3.9-1.7 3.9-3.9 0-2.1-1.5-3.7-3.6-3.7-.3 0-.7 0-.9.1.5-1.8 2-3.6 3.8-4.6L9.6 5zm9 0c-3.6 2-5.6 5-5.6 8.6 0 2.8 1.8 4.9 4.3 4.9 2.2 0 3.9-1.7 3.9-3.9 0-2.1-1.5-3.7-3.6-3.7-.3 0-.7 0-.9.1.5-1.8 2-3.6 3.8-4.6L18.6 5z"/></svg>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p class="quote-text">ITに詳しくないメンバーでも初日から使えました。導入時の伴走サポートが手厚く、社内展開が驚くほどスムーズでした。</p>
+          <div class="quote-person">
+            <div class="avatar" style="background: #0d9488;">S</div>
+            <div>
+              <div class="person-name">佐藤 様</div>
+              <div class="person-role">小売業 / 情報システム部</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-mark">
+            <svg viewBox="0 0 24 24" fill="#ffffff" style="width: 20px;"><path d="M9.6 5C6 7 4 10 4 13.6c0 2.8 1.8 4.9 4.3 4.9 2.2 0 3.9-1.7 3.9-3.9 0-2.1-1.5-3.7-3.6-3.7-.3 0-.7 0-.9.1.5-1.8 2-3.6 3.8-4.6L9.6 5zm9 0c-3.6 2-5.6 5-5.6 8.6 0 2.8 1.8 4.9 4.3 4.9 2.2 0 3.9-1.7 3.9-3.9 0-2.1-1.5-3.7-3.6-3.7-.3 0-.7 0-.9.1.5-1.8 2-3.6 3.8-4.6L18.6 5z"/></svg>
+          </div>
+          <div class="stars">★★★★☆</div>
+          <p class="quote-text">コストは想定より抑えられ、効果は想定以上。半年で投資回収でき、今では全部門に展開しています。</p>
+          <div class="quote-person">
+            <div class="avatar" style="background: #ca8a04;">K</div>
+            <div>
+              <div class="person-name">木村 様</div>
+              <div class="person-role">物流業 / 執行役員</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

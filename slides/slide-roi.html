@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: 51 ROI・投資対効果型
+使うべきタイミング: 「費用対効果」「投資回収」「ROI」。稟議・提案のクロージングで、投資額と効果を並べ回収期間を数直線で見せる。
+向かないケース: 価格表の提示(→⑯料金プラン型)、効果実績の報告(→④KPI型/㊳ケーススタディ型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>ROI・投資対効果型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #f8fbf8;
+    --surface: #ffffff;
+    --surface-2: #ecf7ee;
+    --border: #dceae0;
+    --ink: #14352a;
+    --text: #3f5c50;
+    --sub: #719183;
+    --accent: #16a34a;
+    --accent-2: #34d399;
+    --grad: linear-gradient(120deg, #16a34a, #34d399);
+  }
+  .deco { position: absolute; border-radius: 50%; background: var(--accent); opacity: 0.05; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 32px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  /* 上段: 投資と効果の対比 */
+  .stats { display: flex; gap: 24px; margin-bottom: 24px; }
+  .stat {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 28px;
+    box-shadow: 0 1px 3px rgba(20, 53, 42, 0.05);
+  }
+  .stat .k { font-size: 13.5px; color: var(--sub); margin-bottom: 8px; }
+  .stat .v {
+    font-family: 'Inter', sans-serif;
+    font-size: 40px; font-weight: 800; line-height: 1;
+    color: var(--ink); letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .stat .v span { font-size: 18px; font-weight: 600; color: var(--sub); margin-left: 4px; }
+  .stat.gain { background: var(--grad); border: none; }
+  .stat.gain .k { color: rgba(255,255,255,0.9); }
+  .stat.gain .v { color: #ffffff; }
+  .stat.gain .v span { color: rgba(255,255,255,0.8); }
+
+  /* 中段: 回収タイムライン(ブレークイーブンバー) */
+  .payback {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px 34px 20px;
+    box-shadow: 0 1px 3px rgba(20, 53, 42, 0.05);
+    display: flex; flex-direction: column; justify-content: center;
+    margin-bottom: 20px;
+    min-height: 0;
+  }
+  .pb-label { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 34px; }
+  .pb-bar { position: relative; height: 18px; border-radius: 999px; background: var(--surface-2); margin-bottom: 10px; }
+  .pb-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 38.9%;  /* 14ヶ月 ÷ 36ヶ月 */
+    border-radius: 999px;
+    background: var(--grad);
+  }
+  /* ブレークイーブンの旗マーカー */
+  .pb-marker { position: absolute; left: 38.9%; top: -34px; transform: translateX(-50%); text-align: center; }
+  .pb-marker .flag {
+    display: inline-block;
+    font-size: 12.5px; font-weight: 700; color: #ffffff;
+    background: var(--ink);
+    padding: 4px 12px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pb-marker .pin { width: 2px; height: 14px; background: var(--ink); margin: 2px auto 0; }
+  .pb-axis { position: relative; height: 18px; font-family: 'Inter', sans-serif; font-size: 11.5px; color: var(--sub); }
+  .pb-axis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+  .pb-axis span:first-child { transform: none; }
+  .pb-axis span:last-child { transform: translateX(-100%); }
+
+  /* 下段: 前提条件 */
+  .assume {
+    font-size: 12.5px; color: var(--sub); line-height: 1.7;
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 12px 20px;
+    margin-bottom: 22px;
+  }
+  .assume b { color: var(--text); font-weight: 700; }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 420px; height: 420px; top: -170px; right: -130px;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">ROI Simulation</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">投資は、<em>14ヶ月</em>で回収できる。</h1>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="k">総投資額(3年・ライセンス+導入支援)</div>
+          <div class="v">1,800<span>万円</span></div>
+        </div>
+        <div class="stat">
+          <div class="k">削減効果(3年・工数と外注費)</div>
+          <div class="v">4,200<span>万円</span></div>
+        </div>
+        <div class="stat gain">
+          <div class="k">3年間の差引効果</div>
+          <div class="v">+2,400<span>万円</span></div>
+        </div>
+      </div>
+
+      <div class="payback">
+        <div class="pb-label">投資回収のタイムライン(36ヶ月)</div>
+        <div class="pb-bar">
+          <div class="pb-fill"></div>
+          <div class="pb-marker">
+            <span class="flag">14ヶ月で回収完了</span>
+            <div class="pin"></div>
+          </div>
+        </div>
+        <div class="pb-axis">
+          <span style="left: 0%;">0</span>
+          <span style="left: 33.3%;">12ヶ月</span>
+          <span style="left: 66.7%;">24ヶ月</span>
+          <span style="left: 100%;">36ヶ月</span>
+        </div>
+      </div>
+
+      <p class="assume"><b>試算の前提:</b> 経理・営業事務の定型業務 月120時間を自動化(人件費単価 3,500円/h)、帳票作成の外注費 年180万円を内製化。効果は導入3ヶ月目から段階的に発生する保守的シナリオ。</p>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # slide_design
 
-HTMLでPowerPoint風スライド(16:9 / 1280×720px)を1枚単位で作るためのスキルと、48種のレイアウトパターン実例集。
+HTMLでPowerPoint風スライド(16:9 / 1280×720px)を1枚単位で作るためのスキルと、53種のレイアウトパターン実例集。
 
 ## 構成
 
@@ -9,11 +9,11 @@ HTMLでPowerPoint風スライド(16:9 / 1280×720px)を1枚単位で作るため
   SKILL.md                   #   ワークフローと絶対ルール
   assets/template.html       #   ライトテーマ基本テンプレート
   assets/template-dark.html  #   ダークテーマ基本テンプレート
-  references/pattern-guide.md#   48パターンの選択ガイド(判定フロー)
+  references/pattern-guide.md#   53パターンの選択ガイド(判定フロー)
   references/design-guide.md #   デザインシステム(カラートークン6テーマ・定型CSSレシピ)
   references/svg-guide.md    #   SVG図解の座標計算・定型コード
 .claude/skills/html-slide/   # 同内容のミラー(Claude Code用)
-slides/                      # 実例48枚(slide-*.html)+ gallery.html + previews/*.png
+slides/                      # 実例53枚(slide-*.html)+ gallery.html + previews/*.png
 ```
 
 ## 運用ルール

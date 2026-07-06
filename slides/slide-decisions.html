@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊾ 決定事項・アクション型(会議サマリ)
+使うべきタイミング: 「本日の決定事項」「会議のまとめ」「宿題の確認」。会議の最後や議事共有で、決定・継続検討・ToDo(担当+期限)を1枚に整理する。
+向かないケース: 会議前の議題提示(→⑫アジェンダ型)、資料全体のまとめ(→㉝まとめ型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>決定事項・アクション型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --surface-2: #eff6ff;
+    --border: #e2e8f0;
+    --ink: #0f172a;
+    --text: #334155;
+    --sub: #64748b;
+    --accent: #2563eb;
+    --accent-2: #0ea5e9;
+    --grad: linear-gradient(120deg, #2563eb, #0ea5e9);
+  }
+  .deco { position: absolute; border-radius: 50%; background: var(--accent); opacity: 0.05; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 30px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .body { flex: 1; display: flex; gap: 28px; min-height: 0; margin-bottom: 24px; }
+
+  .sec-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent);
+    display: flex; align-items: center; gap: 9px;
+    margin-bottom: 12px;
+  }
+  .sec-label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--grad); }
+
+  /* 左: 決定事項 */
+  .decided { flex: 1.25; display: flex; flex-direction: column; }
+  .d-list { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+  .d-item {
+    flex: 1;
+    background: var(--surface-2);
+    border: 1px solid #c9dff8;
+    border-radius: 14px;
+    padding: 18px 24px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .d-check {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .d-item h3 { font-size: 16.5px; font-weight: 700; color: var(--ink); margin-bottom: 4px; line-height: 1.5; }
+  .d-item p { font-size: 13px; color: var(--sub); line-height: 1.6; }
+
+  /* 右: 継続検討+ToDo */
+  .aside { flex: 1; display: flex; flex-direction: column; gap: 18px; }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+  .panel .sec-label { color: var(--sub); }
+  .panel .sec-label::before { background: var(--border); }
+
+  .open-item { font-size: 13.5px; color: var(--text); line-height: 1.6; padding: 7px 0 7px 20px; position: relative; }
+  .open-item::before { content: "▸"; position: absolute; left: 2px; color: var(--sub); }
+  .open-item span { color: var(--sub); font-size: 12px; margin-left: 8px; }
+
+  .todo { flex: 1; }
+  .todo-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+    font-size: 13.5px; color: var(--text);
+  }
+  .todo-row .task { flex: 1; line-height: 1.5; }
+  .who {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--text);
+    background: var(--surface-2);
+    padding: 4px 10px 4px 4px; border-radius: 999px;
+    flex-shrink: 0; white-space: nowrap;
+  }
+  .who i {
+    font-style: normal;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--grad); color: #ffffff;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .due {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px; font-weight: 700; color: var(--accent);
+    border: 1px solid #c9dff8;
+    padding: 3px 10px; border-radius: 999px;
+    flex-shrink: 0; white-space: nowrap;
+  }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 420px; height: 420px; top: -170px; right: -130px;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Meeting Summary — 7/7 定例</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">本日の決定は<em>3つ</em>。宿題は来週金曜まで。</h1>
+
+      <div class="body">
+        <div class="decided">
+          <div class="sec-label">Decided — 決定事項</div>
+          <div class="d-list">
+            <div class="d-item">
+              <div class="d-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 16px;">
+                  <path d="M4 12 l5 5 L20 7"/>
+                </svg>
+              </div>
+              <div>
+                <h3>新基盤はB案(段階移行)で進める</h3>
+                <p>フェーズ1は会計領域から。10月の経営会議で全社展開を判断。</p>
+              </div>
+            </div>
+            <div class="d-item">
+              <div class="d-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 16px;">
+                  <path d="M4 12 l5 5 L20 7"/>
+                </svg>
+              </div>
+              <div>
+                <h3>予算は上期1,200万円で確定</h3>
+                <p>ライセンス費600万+導入支援600万。下期分は効果測定後に再協議。</p>
+              </div>
+            </div>
+            <div class="d-item">
+              <div class="d-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 16px;">
+                  <path d="M4 12 l5 5 L20 7"/>
+                </svg>
+              </div>
+              <div>
+                <h3>推進体制は経理+情シスの混成6名</h3>
+                <p>専任2名・兼任4名。週次定例は毎週月曜10時に固定。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="aside">
+          <div class="panel">
+            <div class="sec-label">Open — 継続検討</div>
+            <div class="open-item">販売管理システムの連携範囲<span>次回までに要件整理</span></div>
+            <div class="open-item">運用保守の内製/外部委託の切り分け<span>コスト比較を待って判断</span></div>
+          </div>
+
+          <div class="panel todo">
+            <div class="sec-label">Action Items — 宿題</div>
+            <div class="todo-row" style="border-top: none;">
+              <span class="task">現行業務フローの棚卸しリスト作成</span>
+              <span class="who"><i>田</i>田中</span>
+              <span class="due">7/11</span>
+            </div>
+            <div class="todo-row">
+              <span class="task">ベンダーへ移行スケジュールの再見積り依頼</span>
+              <span class="who"><i>佐</i>佐藤</span>
+              <span class="due">7/11</span>
+            </div>
+            <div class="todo-row">
+              <span class="task">運用保守2案のコスト比較資料</span>
+              <span class="who"><i>鈴</i>鈴木</span>
+              <span class="due">7/14</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: ㊿ リスク&対策型
+使うべきタイミング: 「想定リスクと対応」「懸念点への打ち手」。提案書の終盤やプロジェクト計画で、リスクを影響度付きで列挙し対策を対にして示す。
+向かないケース: 現状課題の喚起(→⑲課題提起型)、SWOTの脅威分析(→㊷SWOT分析型)
+備考: 影響度バッジはセマンティック色(高=ローズ/中=アンバー/低=グリーン)を使う(design-guideの診断系例外)。
+-->
+<head>
+<meta charset="UTF-8">
+<title>リスク&対策型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --surface-2: #eff6ff;
+    --border: #e2e8f0;
+    --ink: #0f172a;
+    --text: #334155;
+    --sub: #64748b;
+    --accent: #2563eb;
+    --accent-2: #0ea5e9;
+    --grad: linear-gradient(120deg, #2563eb, #0ea5e9);
+  }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 38px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 26px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  /* 列見出し */
+  .cols-head {
+    display: grid; grid-template-columns: 1fr 48px 1fr;
+    margin-bottom: 12px;
+  }
+  .col-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--sub);
+    padding-left: 24px;
+  }
+  .col-label.right { color: var(--accent); }
+
+  .rows { flex: 1; display: flex; flex-direction: column; gap: 14px; min-height: 0; margin-bottom: 24px; }
+  .row { flex: 1; display: grid; grid-template-columns: 1fr 48px 1fr; align-items: stretch; }
+
+  .risk, .fix { border-radius: 14px; padding: 16px 24px; display: flex; flex-direction: column; justify-content: center; }
+  .risk { background: var(--surface); border: 1px solid var(--border); }
+  .fix { background: var(--surface-2); border: 1px solid #c9dff8; }
+
+  .risk-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .badge {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em;
+    padding: 3px 12px; border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .badge.high { color: #e11d48; background: #fff1f2; border: 1px solid #fbd5da; }
+  .badge.mid  { color: #d97706; background: #fffbeb; border: 1px solid #f5e5b8; }
+  .badge.low  { color: #059669; background: #ecfdf5; border: 1px solid #bbe7d1; }
+
+  .risk h3, .fix h3 { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .risk p, .fix p { font-size: 12.5px; color: var(--sub); line-height: 1.6; margin-top: 4px; }
+
+  .fix-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .fix-check {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; color: var(--accent);
+  }
+
+  .footer {
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Risk &amp; Mitigation</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">想定リスクには、すべて<em>打ち手</em>を用意した。</h1>
+
+      <div class="cols-head">
+        <span class="col-label">Risk — 想定リスク</span>
+        <span></span>
+        <span class="col-label right">Mitigation — 対策</span>
+      </div>
+
+      <div class="rows">
+        <div class="row">
+          <div class="risk">
+            <div class="risk-head"><span class="badge high">影響度 高</span><h3>移行期間中の業務停止</h3></div>
+            <p>データ移行の失敗や切替トラブルで、月次決算が止まる恐れ。</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="fix">
+            <div class="fix-head">
+              <span class="fix-check"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 13px;"><path d="M4 12 l5 5 L20 7"/></svg></span>
+              <h3>3ヶ月の並行稼働期間を確保</h3>
+            </div>
+            <p>新旧システムを並行運用し、2回の決算で結果一致を確認してから切替。</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="risk">
+            <div class="risk-head"><span class="badge mid">影響度 中</span><h3>現場の利用が定着しない</h3></div>
+            <p>操作に慣れず旧来のExcel運用に戻り、効果が出ない恐れ。</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="fix">
+            <div class="fix-head">
+              <span class="fix-check"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 13px;"><path d="M4 12 l5 5 L20 7"/></svg></span>
+              <h3>部門ごとに推進担当を任命</h3>
+            </div>
+            <p>導入後90日は週次で利用状況をモニタリングし、未利用者を個別フォロー。</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="risk">
+            <div class="risk-head"><span class="badge low">影響度 低</span><h3>ライセンス費用の増加</h3></div>
+            <p>利用者数の増加に伴い、想定よりコストが膨らむ可能性。</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="fix">
+            <div class="fix-head">
+              <span class="fix-check"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 13px;"><path d="M4 12 l5 5 L20 7"/></svg></span>
+              <h3>3年間の価格固定契約を締結</h3>
+            </div>
+            <p>年次で利用状況を棚卸しし、未使用ライセンスを翌年度に減数できる条項付き。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

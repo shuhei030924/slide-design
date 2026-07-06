@@ -345,6 +345,45 @@
 - `◎ ○ △` の3段階を使う(`×`は否定が強すぎるため課題列挙以外では避ける)
 - 色: ◎ = var(--accent)、○ = var(--sub)、△ = #d97706(アンバー)。記号+短い言葉(「◎ 低い」)を併記する
 
+### ブレークイーブンバー(投資回収・期限までの残り)
+
+```html
+<div style="position: relative; height: 18px; border-radius: 999px; background: var(--surface-2);">
+  <div style="position: absolute; inset: 0; width: 38.9%; border-radius: 999px; background: var(--grad);"></div>
+  <!-- 旗マーカー: left をfillと同じ%にして translateX(-50%) -->
+  <div style="position: absolute; left: 38.9%; top: -34px; transform: translateX(-50%);">
+    <span>14ヶ月で回収完了</span>
+  </div>
+</div>
+```
+- width% = 到達点 ÷ 全期間(例: 14ヶ月/36ヶ月 = 38.9%)。計算式をコメントに残す
+- 軸ラベルは絶対配置+`translateX(-50%)`。**両端だけは `transform: none` / `translateX(-100%)`** にしないと端で折り返す(実例: slide-roi)
+
+### 階段カード(30-60-90日プランなどの段階的成長)
+
+```css
+.stairs { display: flex; align-items: flex-end; }  /* 下端を揃える */
+.phase.p1 { height: 76%; } .phase.p2 { height: 88%; } .phase.p3 { height: 100%; }
+```
+- 高さの差で「右肩上がり」を表現する。最終カードだけ `border: 2px solid var(--accent)` で強調(実例: slide-plan90)
+- カード間は `›` の山括弧テキストで軽くつなぐ(太い矢印は重い)
+
+### 担当・期限チップ(ToDo・アクションアイテム)
+
+```html
+<span class="who"><i>田</i>田中</span>  <span class="due">7/11</span>
+```
+```css
+.who { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+       background: var(--surface-2); padding: 4px 10px 4px 4px; border-radius: 999px; }
+.who i { font-style: normal; width: 20px; height: 20px; border-radius: 50%;
+         background: var(--grad); color: #fff; font-size: 11px; font-weight: 700;
+         display: flex; align-items: center; justify-content: center; }
+.due { font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: 700;
+       color: var(--accent); border: 1px solid var(--border); padding: 3px 10px; border-radius: 999px; }
+```
+- ToDoには**必ず担当と期限を付ける**(ないToDoは書かない)。実例: slide-decisions
+
 ### セマンティック4色の例外(SWOT・リスク評価など診断系のみ)
 
 通常は「アクセント2色まで」だが、**意味が色に固定されている診断系フレームワークだけ**は4色を許可する:

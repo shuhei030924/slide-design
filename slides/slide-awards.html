@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: 58 受賞・メディア掲載型(ウォームカジュアル、受賞バッジ3+メディア掲載5)
+使うべきタイミング: 「受賞歴」「メディア掲載実績」「第三者評価」。自社発信ではなく外部評価で信頼性を補強したいとき。会社紹介・IR・採用資料向け。
+向かないケース: 導入企業・取引先の実績訴求(→導入実績ロゴウォール型)、個別事例の深掘り(→ケーススタディ型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>受賞・メディア掲載型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #fffaf3;
+    --surface: #ffffff;
+    --surface-2: #ffedd5;
+    --border: #f3e3cf;
+    --ink: #431f0e;
+    --text: #6b4a35;
+    --sub: #a1836f;
+    --accent: #f97316;
+    --accent-2: #fbbf24;
+    --grad: linear-gradient(120deg, #f97316, #fbbf24);
+  }
+  .deco { position: absolute; border-radius: 50%; background: #fde8c8; pointer-events: none; }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 36px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 28px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .awards { display: flex; gap: 24px; margin-bottom: 32px; }
+  .award {
+    flex: 1; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 26px 26px;
+    box-shadow: 0 1px 3px rgba(67, 31, 14, 0.05);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .award-icon {
+    width: 48px; height: 48px; border-radius: 50%; margin-bottom: 14px;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .award h3 { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .award p { font-size: 12.5px; color: var(--sub); margin-top: 6px; }
+
+  .press-label {
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--sub);
+    margin-bottom: 14px;
+  }
+  .press-wall { flex: 1; min-height: 0; display: flex; gap: 16px; margin-bottom: 24px; }
+  .press {
+    flex: 1; border: 1px solid var(--border); border-radius: 12px;
+    background: var(--surface);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .press span {
+    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 800;
+    letter-spacing: 0.04em; color: #c9a98c;
+  }
+
+  .footer {
+    flex-shrink: 0;
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 20px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="deco" style="width: 380px; height: 380px; top: -160px; right: -120px;"></div>
+
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Awards &amp; Media</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">第三者の評価が、信頼の<em>裏付け</em>に。</h1>
+
+      <div class="awards">
+        <div class="award">
+          <span class="award-icon"><svg viewBox="0 0 24 24" fill="#fff" style="width:24px;"><path d="M8 21l4-3 4 3-1.5-5L18 12h-4.5L12 7l-1.5 5H6l3.5 4z"/></svg></span>
+          <h3>ビジネス大賞2025<br>グランプリ</h3>
+          <p>主催: 日本ビジネス推進協会</p>
+        </div>
+        <div class="award">
+          <span class="award-icon"><svg viewBox="0 0 24 24" fill="#fff" style="width:24px;"><path d="M8 21l4-3 4 3-1.5-5L18 12h-4.5L12 7l-1.5 5H6l3.5 4z"/></svg></span>
+          <h3>Best SaaS<br>of the Year</h3>
+          <p>主催: Cloud Industry Awards</p>
+        </div>
+        <div class="award">
+          <span class="award-icon"><svg viewBox="0 0 24 24" fill="#fff" style="width:24px;"><path d="M8 21l4-3 4 3-1.5-5L18 12h-4.5L12 7l-1.5 5H6l3.5 4z"/></svg></span>
+          <h3>働きがいのある<br>会社 認定</h3>
+          <p>主催: Great Workplace Institute</p>
+        </div>
+      </div>
+
+      <div class="press-label">As Featured In</div>
+      <div class="press-wall">
+        <div class="press"><span>BIZ TODAY</span></div>
+        <div class="press"><span>TECH REVIEW</span></div>
+        <div class="press"><span>MARKET NEWS</span></div>
+        <div class="press"><span>STARTUP DAILY</span></div>
+        <div class="press"><span>INDUSTRY WEEKLY</span></div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: 57 カスタマージャーニー型(コーポレートブルー、5段階+感情曲線)
+使うべきタイミング: 「カスタマージャーニー」「顧客体験の設計」「認知〜購入までの導線」。各段階の顧客感情の起伏とタッチポイントをあわせて見せたいとき。マーケティング・CX設計向け。
+向かないケース: 単純な作業手順(→プロセスフロー型)、転換率の数値中心(→ファネル型)
+図の約束: 折れ線は各段階での顧客満足度(0〜100の相対値)。谷は離脱リスクが高い接点を示す。
+-->
+<head>
+<meta charset="UTF-8">
+<title>カスタマージャーニー型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --surface-2: #eff6ff;
+    --border: #e2e8f0;
+    --ink: #0f172a;
+    --text: #334155;
+    --sub: #64748b;
+    --accent: #2563eb;
+    --accent-2: #0ea5e9;
+    --grad: linear-gradient(120deg, #2563eb, #0ea5e9);
+  }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 56px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 36px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 26px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .stage-row { display: flex; }
+  .stage-col { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .icon-chip {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; margin-bottom: 10px;
+  }
+  .stage-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+
+  .chart-wrap { flex: 1; min-height: 0; display: flex; align-items: center; margin: 4px 0; }
+  .chart-wrap svg { width: 100%; height: 100%; }
+
+  .detail-row { display: flex; margin-bottom: 24px; }
+  .detail-col { flex: 1; padding: 0 14px; text-align: center; }
+  .detail-col .touch { font-size: 12px; color: var(--sub); margin-bottom: 4px; }
+  .detail-col .action { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+
+  .footer {
+    flex-shrink: 0;
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 20px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">Customer Journey</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">認知から契約まで、<em>5つの接点</em>を設計する。</h1>
+
+      <div class="stage-row">
+        <div class="stage-col">
+          <span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="stage-name">認知</span>
+        </div>
+        <div class="stage-col">
+          <span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;"><path d="M12 3 l2.5 5.5 6 0.7-4.3 4.2 1 6-5.2-3-5.2 3 1-6-4.3-4.2 6-0.7z"/></svg></span>
+          <span class="stage-name">興味</span>
+        </div>
+        <div class="stage-col">
+          <span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;"><circle cx="10" cy="10" r="6"/><path d="M20 20 l-5.5-5.5"/></svg></span>
+          <span class="stage-name">比較検討</span>
+        </div>
+        <div class="stage-col">
+          <span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;"><path d="M4 12 l5 5 L20 7"/></svg></span>
+          <span class="stage-name">購入</span>
+        </div>
+        <div class="stage-col">
+          <span class="icon-chip"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;"><path d="M4 4v5h5"/><path d="M20 20v-5h-5"/><path d="M4 9a8 8 0 0 1 14-4.5M20 15a8 8 0 0 1-14 4.5"/></svg></span>
+          <span class="stage-name">継続利用</span>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <!-- 折れ線: viewBox 1120x160。列中心x=112,336,560,784,1008(224刻み)。baseY=140,plotH=110,maxV=100 -->
+        <svg viewBox="0 0 1120 160" preserveAspectRatio="none">
+          <line x1="0" y1="140" x2="1120" y2="140" stroke="var(--border)" stroke-width="1.5"/>
+          <polyline points="112,74 336,90.5 560,107 784,63 1008,43.2"
+                    fill="none" stroke="var(--accent)" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="112"  cy="74"   r="6" fill="var(--accent)"/>
+          <circle cx="336"  cy="90.5" r="6" fill="var(--accent)"/>
+          <circle cx="560"  cy="107"  r="6" fill="#f59e0b"/>
+          <circle cx="784"  cy="63"   r="6" fill="var(--accent)"/>
+          <circle cx="1008" cy="43.2" r="6" fill="var(--accent)"/>
+          <!-- 谷の注記: 円の上 y=107-16=91 -->
+          <text x="560" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#d97706">検討の壁</text>
+        </svg>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-col">
+          <div class="touch">SNS広告・記事</div>
+          <div class="action">課題喚起コンテンツを配信</div>
+        </div>
+        <div class="detail-col">
+          <div class="touch">資料DL・比較サイト</div>
+          <div class="action">事例・比較表を提示</div>
+        </div>
+        <div class="detail-col">
+          <div class="touch">無料相談・デモ</div>
+          <div class="action">個別デモで懸念を解消</div>
+        </div>
+        <div class="detail-col">
+          <div class="touch">見積・契約</div>
+          <div class="action">契約書類を最短即日発行</div>
+        </div>
+        <div class="detail-col">
+          <div class="touch">活用支援・更新</div>
+          <div class="action">専任担当が定着まで伴走</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

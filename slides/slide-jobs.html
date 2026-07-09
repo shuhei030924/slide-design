@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+パターン: 59 求人ポジション一覧型(フォレストグリーン、募集職種5行)
+使うべきタイミング: 「採用ポジション一覧」「募集職種」「積極採用中」。採用資料・会社紹介で複数の募集職種を部門・雇用形態・勤務地とあわせて一覧させたいとき。
+向かないケース: 1職種の詳しい仕事内容説明(→用語解説型を応用)、福利厚生の紹介(→福利厚生型)
+-->
+<head>
+<meta charset="UTF-8">
+<title>求人ポジション一覧型スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #e5e7eb;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    overflow: hidden; position: relative;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  }
+  :root {
+    --bg: #f8fbf8;
+    --surface: #ffffff;
+    --surface-2: #ecf7ee;
+    --border: #dceae0;
+    --ink: #14352a;
+    --text: #3f5c50;
+    --sub: #719183;
+    --accent: #16a34a;
+    --accent-2: #34d399;
+    --grad: linear-gradient(120deg, #16a34a, #34d399);
+  }
+
+  .slide-inner {
+    position: relative; z-index: 1;
+    height: 100%; padding: 52px 80px;
+    display: flex; flex-direction: column;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .logo { height: 38px; max-width: 220px; display: flex; align-items: center; }
+  .logo-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; color: var(--ink); }
+
+  .slide-title {
+    font-size: 34px; font-weight: 900;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 22px;
+  }
+  .slide-title em { font-style: normal; color: var(--accent); }
+
+  .jobs { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+  .job {
+    flex: 1; display: flex; align-items: center; gap: 20px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 0 24px;
+  }
+  .job-icon {
+    width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .job-main { flex: 1; min-width: 0; }
+  .job-title { font-size: 16.5px; font-weight: 700; color: var(--ink); }
+  .job-dept { font-size: 12.5px; color: var(--sub); margin-top: 2px; }
+  .job-tags { display: flex; gap: 8px; flex-shrink: 0; }
+  .job-tag {
+    font-size: 12px; font-weight: 600; color: var(--accent);
+    background: var(--surface-2); padding: 5px 12px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .job-arrow { flex-shrink: 0; color: var(--accent); }
+
+  .footer {
+    flex-shrink: 0;
+    font-size: 12px; color: var(--sub); letter-spacing: 0.15em;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="topbar">
+        <span class="kicker">We're Hiring</span>
+        <!-- ★会社ロゴ: <img src="../images/logo.png" alt="会社ロゴ"> に差し替え可 -->
+        <div class="logo">
+          <svg viewBox="0 0 40 40" fill="none" style="width: 32px; margin-right: 9px;">
+            <path d="M20 4 L36 32 H4 Z" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="24" r="5" fill="var(--accent)"/>
+          </svg>
+          <span class="logo-text">YOUR LOGO</span>
+        </div>
+      </div>
+
+      <h1 class="slide-title">積極採用中、<em>5職種</em>で仲間を募集しています。</h1>
+
+      <div class="jobs">
+        <div class="job">
+          <span class="job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+          <div class="job-main">
+            <div class="job-title">プロダクトマネージャー</div>
+            <div class="job-dept">プロダクト部</div>
+          </div>
+          <div class="job-tags">
+            <span class="job-tag">正社員</span>
+            <span class="job-tag">東京(リモート可)</span>
+          </div>
+          <span class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;"><path d="M9 6l6 6-6 6"/></svg></span>
+        </div>
+        <div class="job">
+          <span class="job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></span>
+          <div class="job-main">
+            <div class="job-title">バックエンドエンジニア</div>
+            <div class="job-dept">開発部</div>
+          </div>
+          <div class="job-tags">
+            <span class="job-tag">正社員</span>
+            <span class="job-tag">フルリモート</span>
+          </div>
+          <span class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;"><path d="M9 6l6 6-6 6"/></svg></span>
+        </div>
+        <div class="job">
+          <span class="job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+          <div class="job-main">
+            <div class="job-title">セールスマネージャー</div>
+            <div class="job-dept">営業部</div>
+          </div>
+          <div class="job-tags">
+            <span class="job-tag">正社員</span>
+            <span class="job-tag">東京</span>
+          </div>
+          <span class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;"><path d="M9 6l6 6-6 6"/></svg></span>
+        </div>
+        <div class="job">
+          <span class="job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          <div class="job-main">
+            <div class="job-title">カスタマーサクセス</div>
+            <div class="job-dept">CS部</div>
+          </div>
+          <div class="job-tags">
+            <span class="job-tag">正社員</span>
+            <span class="job-tag">東京(リモート可)</span>
+          </div>
+          <span class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;"><path d="M9 6l6 6-6 6"/></svg></span>
+        </div>
+        <div class="job">
+          <span class="job-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+          <div class="job-main">
+            <div class="job-title">コーポレートスタッフ(経理)</div>
+            <div class="job-dept">管理部</div>
+          </div>
+          <div class="job-tags">
+            <span class="job-tag">正社員・時短相談可</span>
+            <span class="job-tag">東京</span>
+          </div>
+          <span class="job-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;"><path d="M9 6l6 6-6 6"/></svg></span>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>YOUR COMPANY INC.</span>
+        <span>2026.07</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
